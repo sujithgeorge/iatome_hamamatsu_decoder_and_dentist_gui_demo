@@ -1878,7 +1878,7 @@ body.view-dentist .breadcrumbs button {
   const DB_NAME = "alerio-clinic-demo-v2";
   const DB_VERSION = 1;
   const S3_BASE =
-    "https://iatome-hamamatsu-xray-input-files.s3.ap-south-1.amazonaws.com";
+    "https://iatome-hamamatsu-xray-decoder-input-files.s3.ap-south-1.amazonaws.com";
   const assetUrl = (name) => `${S3_BASE}/${name}`;
 
   const SAMPLE_DENTISTS = [
@@ -2246,7 +2246,7 @@ body.view-dentist .breadcrumbs button {
 /** Shared Hamamatsu sample download + dark/shading correction for Ics. */
 (function (global) {
   const S3_BASE =
-    "https://iatome-hamamatsu-xray-input-files.s3.ap-south-1.amazonaws.com";
+    "https://iatome-hamamatsu-xray-decoder-input-files.s3.ap-south-1.amazonaws.com";
   const KEYS = ["Idr", "Ido", "Ixr", "Ixo"];
   const HEADER_BYTES = 16;
   const WIDTH = 1000;
@@ -3041,7 +3041,7 @@ body.view-dentist .breadcrumbs button {
     let syncing = false;
 
     const S3_BASE =
-      "https://iatome-hamamatsu-xray-input-files.s3.ap-south-1.amazonaws.com";
+      "https://iatome-hamamatsu-xray-decoder-input-files.s3.ap-south-1.amazonaws.com";
     const KEYS = ["Idr", "Ido", "Ixr", "Ixo"];
     const HEADER_BYTES = 16;
     const WIDTH = 1000;
