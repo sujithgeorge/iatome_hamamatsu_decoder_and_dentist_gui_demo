@@ -1265,16 +1265,28 @@ body.view-hamamatsu .page-header {
   margin-bottom: 0.35rem;
 }
 body.view-hamamatsu .page-header h1 { margin: 0; }
-body.view-hamamatsu .home-link {
-  margin: 0 0 0.35rem;
-  font-size: 0.88rem;
-}
-body.view-hamamatsu .home-link a {
-  color: var(--brand);
+body.view-hamamatsu .home-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 0.85rem;
+  color: var(--text);
   text-decoration: none;
-  font-weight: 500;
+  font-size: 1rem;
+  font-weight: 600;
 }
-body.view-hamamatsu .home-link a:hover { text-decoration: underline; color: var(--brand-dark); }
+body.view-hamamatsu .home-back:hover { color: var(--brand-dark); }
+body.view-hamamatsu .btn-back {
+  border: 1px solid #c9ced3;
+  background: #fff;
+  color: var(--brand);
+}
+body.view-hamamatsu .btn-back:hover,
+body.view-hamamatsu .home-back:hover .btn-back {
+  background: color-mix(in srgb, var(--brand) 8%, white);
+  border-color: color-mix(in srgb, var(--brand) 40%, #c9ced3);
+  color: var(--brand-dark);
+}
 body.view-hamamatsu #btnExplain {
   font-weight: 600;
   white-space: nowrap;
@@ -1387,6 +1399,24 @@ body.view-dentist .breadcrumbs button {
   background: transparent;
   color: var(--brand);
 }
+body.view-dentist .home-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 1rem;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+}
+body.view-dentist .home-back:hover {
+  color: var(--brand-dark);
+}
+body.view-dentist .home-back:hover .btn-back {
+  background: color-mix(in srgb, var(--brand) 8%, white);
+  border-color: color-mix(in srgb, var(--brand) 40%, #c9ced3);
+  color: var(--brand-dark);
+}
   
   </style>
 </head>
@@ -1459,6 +1489,14 @@ body.view-dentist .breadcrumbs button {
 
   <main>
     <section class="screen" id="screenDentists">
+      <a class="home-back" href="#home" data-route="home">
+        <span class="btn-back" aria-hidden="true">
+          <svg class="btn-back-icon" viewBox="0 0 24 24" focusable="false">
+            <path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        Back to Home Page
+      </a>
       <h1>Select dentist</h1>
       <p class="lede">
         No login required for this demo. All dentists share the same clinic patient list.
@@ -1623,7 +1661,14 @@ body.view-dentist .breadcrumbs button {
     <div id="inputStage">
       <div class="page-header">
         <div>
-          <p class="home-link"><a href="#home" data-route="home">← ALERIO demo home</a></p>
+          <a class="home-back" href="#home" data-route="home">
+            <span class="btn-back" aria-hidden="true">
+              <svg class="btn-back-icon" viewBox="0 0 24 24" focusable="false">
+                <path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            Back to Home Page
+          </a>
           <h1>Hamamatsu Decoding</h1>
         </div>
         <button id="btnExplain" type="button">Explain the algorithm</button>
@@ -2377,8 +2422,7 @@ body.view-dentist .breadcrumbs button {
       document.querySelectorAll('[data-route]').forEach((el) => {
         el.addEventListener('click', (ev) => {
           ev.preventDefault();
-          const route = el.getAttribute('data-route');
-          location.hash = route;
+          assignHash(el.getAttribute('data-route'));
         });
       });
     }
@@ -2422,7 +2466,7 @@ body.view-dentist .breadcrumbs button {
         syncFromHash(next);
         return;
       }
-      location.hash = next;
+      assignHash(next);
     }
 
     function persistDentist(dentist) {
@@ -2446,9 +2490,12 @@ body.view-dentist .breadcrumbs button {
       const crumbs = [{ label: "Demo home", action: "home" }];
 
       if (screen === "dentists") {
-        crumbs.push({ label: "Select dentist", current: true });
-      } else {
-        crumbs.push({ label: "Select dentist", action: "dentists" });
+        nav.innerHTML = "";
+        nav.hidden = true;
+        return;
+      }
+      nav.hidden = false;
+      crumbs.push({ label: "Select dentist", action: "dentists" });
         crumbs.push({ label: dentistLabel, action: "patients" });
 
         if (screen === "patients") {
@@ -2475,7 +2522,6 @@ body.view-dentist .breadcrumbs button {
             current: true,
           });
         }
-      }
 
       nav.innerHTML = "";
       crumbs.forEach((crumb, i) => {
@@ -2504,7 +2550,7 @@ body.view-dentist .breadcrumbs button {
 
     function navigateBreadcrumb(action) {
       if (action === "home") {
-        location.hash = "home";
+        assignHash("home");
         return;
       }
       if (action === "dentists") {
@@ -3033,7 +3079,7 @@ body.view-dentist .breadcrumbs button {
       }
     })();
 
-    return { ready, syncFromHash, confirmLeaveApp };
+    return { ready, syncFromHash, confirmLeaveApp, currentPatientId: () => (state.patient ? state.patient.id : "") };
     }
 
     function initHamamatsu() {
@@ -3226,7 +3272,7 @@ body.view-dentist .breadcrumbs button {
         syncFromHash(next);
         return;
       }
-      location.hash = next;
+      assignHash(next);
     }
 
     function clearResultsView() {
@@ -3684,8 +3730,7 @@ body.view-dentist .breadcrumbs button {
     });
 
     btnBack.addEventListener("click", () => {
-      if (currentHashPath() === "hamamatsu/results") history.back();
-      else go("hamamatsu", { replace: true });
+      go("hamamatsu");
       log("Back to inputs. Click “Process Frames and View Result” again to reopen the viewer.", "ok");
     });
 
@@ -3760,6 +3805,59 @@ body.view-dentist .breadcrumbs button {
 
     let routeRunning = false;
     let routeAgain = false;
+    let currentHash = "home";
+    let homeTrapArmed = false;
+    let assigningHash = false;
+    let popRouted = false;
+
+    function assignHash(next) {
+      const value = String(next || "home").replace(/^#/, "") || "home";
+      assigningHash = true;
+      try {
+        location.hash = value;
+      } finally {
+        assigningHash = false;
+      }
+    }
+
+    function normalizeHash(hash) {
+      return String(hash || "home").replace(/^#/, "") || "home";
+    }
+
+    function parentHash(hash) {
+      const parts = normalizeHash(hash).split("/").filter(Boolean);
+      const app = parts[0] || "home";
+      if (app === "home") return "home";
+      if (app === "hamamatsu") return parts.length > 1 ? "hamamatsu" : "home";
+      if (app !== "dentist") return "home";
+      if (parts.length === 1) return "home";
+      if (parts[1] === "patients") return "dentist";
+      if (parts[1] === "new-patient" || parts[1] === "patient") return "dentist/patients";
+      if (parts[1] === "visit") {
+        const patientId =
+          window.__dentistCtl && window.__dentistCtl.currentPatientId
+            ? window.__dentistCtl.currentPatientId()
+            : "";
+        return patientId ? `dentist/patient/${patientId}` : "dentist/patients";
+      }
+      return "dentist";
+    }
+
+    function rememberHash(hash) {
+      currentHash = normalizeHash(hash);
+      if (currentHash !== "home") {
+        homeTrapArmed = false;
+        return;
+      }
+      if (homeTrapArmed) return;
+      history.pushState({ homeTrap: true }, "", "#home");
+      homeTrapArmed = true;
+    }
+
+    function stayOnHome() {
+      history.pushState({ homeTrap: true }, "", "#home");
+      homeTrapArmed = true;
+    }
 
     async function route() {
       if (routeRunning) {
@@ -3778,8 +3876,8 @@ body.view-dentist .breadcrumbs button {
     }
 
     async function routeOnce() {
-      const hash = (location.hash || '#home').replace(/^#/, '') || 'home';
-      const app = hash.split('/')[0] || 'home';
+      const hash = normalizeHash(location.hash || "#home");
+      const app = hash.split("/")[0] || "home";
 
       if (app !== 'dentist' && window.__dentistCtl) {
         if (!(await window.__dentistCtl.confirmLeaveApp())) return;
@@ -3801,6 +3899,7 @@ body.view-dentist .breadcrumbs button {
         }
         await window.__dentistCtl.syncFromHash(hash);
         window.scrollTo(0, 0);
+        rememberHash(hash);
         return;
       }
 
@@ -3818,6 +3917,7 @@ body.view-dentist .breadcrumbs button {
         }
         await window.__hamamatsuCtl.syncFromHash(hash);
         window.scrollTo(0, 0);
+        rememberHash(hash);
         return;
       }
 
@@ -3829,9 +3929,35 @@ body.view-dentist .breadcrumbs button {
       mountTemplate('tpl-home');
       wireHomeLinks();
       window.scrollTo(0, 0);
+      rememberHash("home");
     }
 
-    window.addEventListener('hashchange', () => { route(); });
+    window.addEventListener("popstate", () => {
+      // Setting location.hash also fires popstate in this browser. That one
+      // is in-app navigation; hashchange routes it. Only a real Back/Forward
+      // arrives with assigningHash still false.
+      if (assigningHash) return;
+      const parent = currentHash === "home" ? "home" : parentHash(currentHash);
+      const landed = normalizeHash(location.hash);
+      if (landed !== parent) {
+        history.replaceState(null, "", "#" + parent);
+        popRouted = true;
+        setTimeout(() => {
+          popRouted = false;
+        }, 0);
+        route();
+        return;
+      }
+      if (parent === "home") stayOnHome();
+      if (landed === currentHash) return;
+    });
+    window.addEventListener("hashchange", () => {
+      if (popRouted) {
+        popRouted = false;
+        return;
+      }
+      route();
+    });
     route();
   </script>
 </body>
