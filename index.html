@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ALERIO Clinic Demo</title>
+  <title>ALERIO Demo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -1080,20 +1080,6 @@ body.view-hamamatsu .view-top h1 {
   font-size: 1.85rem;
   letter-spacing: -0.02em;
 }
-body.view-hamamatsu #btnBack {
-  background: var(--brand);
-  color: #ffffff;
-  border-color: var(--brand);
-  font-weight: 700;
-  font-size: 1rem;
-  min-height: 2.75rem;
-  padding: 0.7rem 1.15rem;
-  box-shadow: 0 8px 18px color-mix(in srgb, var(--brand) 28%, transparent);
-}
-body.view-hamamatsu #btnBack:hover {
-  background: var(--brand-dark);
-  border-color: var(--brand-dark);
-}
 body.view-hamamatsu .view-picker {
   display: flex;
   flex-direction: column;
@@ -1128,13 +1114,13 @@ body.view-hamamatsu .accordion.open #btnShowIntermediate {
 }
 body.view-hamamatsu .accordion-chevron {
   flex-shrink: 0;
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1.85rem;
+  height: 1.85rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--brand);
-  font-size: 0.85rem;
+  font-size: 1.7rem;
   line-height: 1;
   transition: transform 0.18s ease;
 }
@@ -1293,9 +1279,23 @@ body.view-hamamatsu .home-back {
 }
 body.view-hamamatsu .home-back:hover { color: var(--brand-dark); }
 body.view-hamamatsu .btn-back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.85rem;
+  height: 2.85rem;
+  min-height: 0;
+  padding: 0;
   border: 1px solid #c9ced3;
+  border-radius: 8px;
   background: #fff;
   color: var(--brand);
+  flex-shrink: 0;
+}
+body.view-hamamatsu .btn-back-icon {
+  width: 1.45rem;
+  height: 1.45rem;
+  display: block;
 }
 body.view-hamamatsu .btn-back:hover,
 body.view-hamamatsu .home-back:hover .btn-back {
@@ -1797,11 +1797,16 @@ body.view-dentist .home-back:hover .btn-back {
 
   <div id="viewStage" class="hidden" aria-hidden="true">
     <div class="view-top">
-      <button id="btnBack" type="button" class="primary">← Back to inputs</button>
+      <button id="btnBack" type="button" class="btn-back" aria-label="Back to inputs" title="Back to inputs">
+        <svg class="btn-back-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
       <h1>View Results</h1>
     </div>
     <div class="view-picker">
       <div class="view-primary-row">
+        <div id="viewFinalButtons"></div>
         <div class="accordion" id="intermediateAccordion">
           <button
             id="btnShowIntermediate"
@@ -1816,7 +1821,6 @@ body.view-dentist .home-back:hover .btn-back {
             </span>
           </button>
         </div>
-        <div id="viewFinalButtons"></div>
       </div>
       <div
         class="accordion-panel view-controls hidden"
@@ -3943,7 +3947,7 @@ body.view-dentist .home-back:hover .btn-back {
       window.__hamamatsuCtl = null;
       document.body.classList.remove('view-home', 'view-dentist', 'view-hamamatsu');
       document.body.classList.add('view-home');
-      document.title = 'ALERIO Clinic Demo';
+      document.title = 'ALERIO Demo';
       mountTemplate('tpl-home');
       wireHomeLinks();
       window.scrollTo(0, 0);
