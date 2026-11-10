@@ -1,0 +1,3838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ALERIO Clinic Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100vh; }
+.app-root { min-height: 100vh; }
+.hidden { display: none !important; }
+
+/* HOME */
+body.view-home {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --muted: #626262;
+  --line: rgba(0, 0, 0, 0.08);
+  --brand: #642667;
+  --brand-dark: #57195a;
+  --brand-deep: #510040;
+  font-family: Poppins, system-ui, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(900px 420px at 85% -10%, color-mix(in srgb, var(--brand) 18%, white), transparent 60%),
+    radial-gradient(700px 380px at 0% 100%, color-mix(in srgb, var(--brand-deep) 10%, white), transparent 55%),
+    var(--bg);
+}
+
+    * { box-sizing: border-box; }header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      padding: 1rem 1.25rem;
+    }
+    .brand-row {
+      max-width: 980px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .mark {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 0.55rem;
+      background: linear-gradient(145deg, var(--brand), var(--brand-deep));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .brand-name {
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+    }
+    .brand-sub {
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3.5rem;
+    }
+    h1 {
+      margin: 0 0 0.45rem;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      font-weight: 600;
+      line-height: 1.2;
+    }
+    .lede {
+      margin: 0 0 2rem;
+      max-width: 38rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .routes {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+      gap: 1rem;
+    }
+    a.route {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      text-decoration: none;
+      color: inherit;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.35rem 1.3rem 1.4rem;
+      box-shadow: 0 10px 30px rgba(1, 7, 39, 0.06);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    a.route:hover {
+      transform: translateY(-2px);
+      border-color: color-mix(in srgb, var(--brand) 35%, var(--line));
+      box-shadow: 0 16px 36px rgba(100, 38, 103, 0.14);
+    }
+    .eyebrow {
+      color: var(--brand);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.45rem;
+    }
+    .route h2 {
+      margin: 0 0 0.45rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .route p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+      flex: 1 1 auto;
+    }
+    .cta {
+      display: inline-block;
+      align-self: flex-start;
+      margin-top: auto;
+      background: var(--brand);
+      color: #ffffff;
+      padding: 0.65rem 1rem;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    a.route:hover .cta { background: var(--brand-dark); }
+  
+
+/* DENTIST */
+
+    body.view-dentist {
+      --bg: #f4f5f7;
+      --surface: #ffffff;
+      --text: #1a1a1a;
+      --muted: #626262;
+      --line: rgba(0, 0, 0, 0.08);
+      --brand: #642667;
+      --brand-dark: #57195a;
+      --brand-deep: #510040;
+      --ok: #2f9e6b;
+      --bad: #c44747;
+      --warn: #b8860b;
+    }
+    * { box-sizing: border-box; }
+body.view-dentist {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Poppins, system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+    }
+    header.app-bar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+      padding: 0.85rem 1.25rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .app-bar-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .mark {
+      width: 2.2rem;
+      height: 2.2rem;
+      border-radius: 0.5rem;
+      background: linear-gradient(145deg, var(--brand), var(--brand-deep));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+    }
+    .brand strong { display: block; font-size: 0.95rem; letter-spacing: 0.04em; }
+    .brand span { color: var(--muted); font-size: 0.78rem; }
+    .who {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .who strong { color: var(--text); font-weight: 600; }
+    .breadcrumbs {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0.75rem 1.25rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem 0.15rem;
+      font-size: 0.86rem;
+      color: var(--muted);
+    }
+    .breadcrumbs button {
+      appearance: none;
+      border: none;
+      background: transparent;
+      color: var(--brand);
+      font: inherit;
+      font-weight: 500;
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .breadcrumbs button:hover {
+      background: color-mix(in srgb, var(--brand) 8%, white);
+      color: var(--brand-dark);
+    }
+    .breadcrumbs .crumb-current {
+      color: var(--text);
+      font-weight: 600;
+      padding: 0.15rem 0.35rem;
+    }
+    .breadcrumbs .crumb-sep {
+      color: #9aa0a6;
+      padding: 0 0.1rem;
+      user-select: none;
+    }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+    .screen.hidden { display: none; }
+    h1 {
+      margin: 0 0 0.35rem;
+      font-size: 1.7rem;
+      font-weight: 600;
+    }
+    h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+    .lede {
+      margin: 0 0 1.4rem;
+      color: var(--muted);
+      line-height: 1.5;
+      max-width: 40rem;
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1.1rem 1.2rem;
+      box-shadow: 0 10px 28px rgba(1, 7, 39, 0.05);
+      margin-bottom: 1rem;
+    }
+    .grid-dentists {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+      gap: 0.85rem;
+    }
+    button, .btn {
+      appearance: none;
+      border: 1px solid #c9ced3;
+      background: #fff;
+      color: #1a1a1a;
+      font: inherit;
+      border-radius: 5px;
+      padding: 0.75rem 1.05rem;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    button.primary, .btn.primary {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #ffffff;
+      font-weight: 600;
+    }
+    button.primary:hover, .btn.primary:hover {
+      background: var(--brand-dark);
+      border-color: var(--brand-dark);
+      color: #ffffff;
+    }
+    .btn-new-patient {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      min-height: 2.85rem;
+      padding: 0.75rem 1.2rem;
+      font-size: 1rem;
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #ffffff;
+      box-shadow: 0 8px 18px color-mix(in srgb, var(--brand) 28%, transparent);
+    }
+    .btn-new-patient:hover {
+      background: var(--brand-dark);
+      border-color: var(--brand-dark);
+      color: #ffffff;
+    }
+    .btn-new-patient .btn-plus {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 1.35rem;
+      height: 1.35rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.22);
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    button.danger {
+      background: #fff;
+      border-color: #e0a0a0;
+      color: #9b1c1c;
+      font-weight: 600;
+    }
+    button:disabled { opacity: 0.45; cursor: not-allowed; }
+    .action-banner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+      padding: 0.95rem 1.05rem;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(1, 7, 39, 0.04);
+    }
+    .action-banner p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.4;
+      max-width: 36rem;
+    }
+    .action-banner .primary {
+      min-height: 2.85rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      font-size: 1rem;
+    }
+    .dentist-card {
+      text-align: left;
+      width: 100%;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: #fafafa;
+      display: flex;
+      gap: 0.85rem;
+      align-items: center;
+    }
+    .dentist-card:hover {
+      border-color: color-mix(in srgb, var(--brand) 40%, var(--line));
+      background: #fff;
+    }
+    .dentist-card .title {
+      color: var(--brand);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .dentist-card .name { font-weight: 600; font-size: 1.05rem; color: #1a1a1a; }
+    .avatar {
+      width: 3.25rem;
+      height: 3.25rem;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #e8e8e8;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1px var(--line);
+    }
+    .avatar.lg {
+      width: 4.25rem;
+      height: 4.25rem;
+    }
+    .avatar.sm {
+      width: 2.35rem;
+      height: 2.35rem;
+    }
+    .person-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .patient-name {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-weight: 500;
+      color: #1a1a1a;
+    }
+    .gender-field {
+      margin-bottom: 0.85rem;
+    }
+    .gender-options {
+      display: flex;
+      gap: 0.55rem;
+      flex-wrap: wrap;
+    }
+    .gender-options label {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      margin: 0;
+      font-weight: 500;
+      border: 1px solid #c9ced3;
+      border-radius: 5px;
+      padding: 0.65rem 0.9rem;
+      cursor: pointer;
+      background: #fff;
+      color: #1a1a1a;
+    }
+    .gender-options input {
+      margin: 0;
+      accent-color: var(--brand);
+    }
+    .gender-options label:has(input:checked) {
+      border-color: var(--brand);
+      background: color-mix(in srgb, var(--brand) 8%, white);
+      font-weight: 600;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.85rem;
+    }
+    .toolbar .left, .toolbar .right {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      align-items: center;
+    }
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.85rem;
+      height: 2.85rem;
+      padding: 0;
+      border-radius: 8px;
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+    .btn-back:hover {
+      background: color-mix(in srgb, var(--brand) 8%, white);
+      border-color: color-mix(in srgb, var(--brand) 40%, #c9ced3);
+      color: var(--brand-dark);
+    }
+    .btn-back-icon {
+      width: 1.45rem;
+      height: 1.45rem;
+      display: block;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.7rem 0.55rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    tr.patient-row { cursor: pointer; }
+    tr.patient-row:hover { background: color-mix(in srgb, var(--brand) 5%, white); }
+    .muted { color: var(--muted); }
+    .mono { font-variant-numeric: tabular-nums; font-family: ui-monospace, monospace; }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+    input[type="text"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      padding: 0.7rem 0.8rem;
+      font: inherit;
+      background: #fff;
+      color: var(--text);
+      margin-bottom: 0.85rem;
+      box-sizing: border-box;
+    }
+    textarea { min-height: 7rem; resize: vertical; }
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+    .meta-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin: 0 0 1rem;
+    }
+    .chip {
+      background: color-mix(in srgb, var(--brand) 8%, white);
+      color: var(--brand-deep);
+      border: 1px solid color-mix(in srgb, var(--brand) 18%, var(--line));
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .visit-list {
+      display: grid;
+      gap: 0.55rem;
+    }
+    .visit-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+      width: 100%;
+      text-align: left;
+      padding: 0.85rem 0.95rem;
+      border: 1px solid #c9ced3;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    .visit-item:hover {
+      background: #fff;
+      border-color: color-mix(in srgb, var(--brand) 35%, #c9ced3);
+    }
+    .scan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      gap: 0.85rem;
+    }
+    .scan-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #111;
+    }
+    .scan-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 18rem;
+      object-fit: contain;
+      background: #000;
+    }
+    .scan-card .foot {
+      background: var(--surface);
+      padding: 0.7rem 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .scan-card .foot .when {
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      background: rgba(25, 37, 48, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .overlay.hidden { display: none; }
+    .overlay-card {
+      background: var(--surface);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      min-width: min(20rem, 100%);
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+    .overlay-card.info {
+      text-align: left;
+      max-width: 22rem;
+      width: 100%;
+    }
+    .overlay-card.info h3 {
+      margin: 0 0 0.55rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--brand);
+    }
+    .overlay-card.info p {
+      margin: 0 0 1.1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+    .overlay-card.info .form-actions {
+      margin: 0;
+      justify-content: flex-end;
+    }
+    #appDialog { z-index: 80; }
+    #appDialog .overlay-card.info { max-width: 28rem; }
+    #appDialog p { white-space: pre-line; }
+    #appDialog.tone-error h3 { color: var(--bad, #b42318); }
+    #appDialog.tone-warn h3 { color: var(--warn, #b54708); }
+    #appDialog button {
+      appearance: none;
+      border: 1px solid #c9ced3;
+      background: #fff;
+      color: #1a1a1a;
+      padding: 0.65rem 0.95rem;
+      border-radius: 5px;
+      font: inherit;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    #appDialog button.primary {
+      background: var(--brand, #642667);
+      border-color: var(--brand, #642667);
+      color: #fff;
+      font-weight: 600;
+    }
+    #appDialog button.danger {
+      background: #fff;
+      border-color: #e0a0a0;
+      color: #9b1c1c;
+      font-weight: 600;
+    }
+    .spinner {
+      width: 2rem;
+      height: 2rem;
+      margin: 0 auto 0.85rem;
+      border: 3px solid color-mix(in srgb, var(--brand) 25%, white);
+      border-top-color: var(--brand);
+      border-radius: 50%;
+      animation: spin 0.75s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .tooth-spinner {
+      width: 4.4rem;
+      height: 5.2rem;
+      margin: 0 auto 0.9rem;
+      display: block;
+      color: var(--brand);
+    }
+    .tooth-spinner path {
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .tooth-spinner .tooth-guide {
+      opacity: 0.18;
+    }
+    .tooth-spinner .tooth-draw {
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: toothDraw 1.8s ease-in-out infinite;
+    }
+    @keyframes toothDraw {
+      0% { stroke-dashoffset: 100; opacity: 1; }
+      62% { stroke-dashoffset: 0; opacity: 1; }
+      82% { stroke-dashoffset: 0; opacity: 1; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tooth-spinner .tooth-draw {
+        animation: none;
+        stroke-dashoffset: 0;
+        opacity: 1;
+      }
+    }
+    .toast {
+      position: fixed;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 50;
+      background: #1a1a1a;
+      color: #fff;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      max-width: 22rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+    .toast.hidden { display: none; }
+    .toast.bad { background: var(--bad); }
+    .toast.ok { background: var(--ok); }
+    .empty {
+      color: var(--muted);
+      padding: 0.75rem 0;
+      font-size: 0.92rem;
+    }
+  
+
+/* HAMAMATSU — Alerio theme (matches Dentist) */
+body.view-hamamatsu {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --panel: #ffffff;
+  --text: #1a1a1a;
+  --muted: #626262;
+  --line: rgba(0, 0, 0, 0.08);
+  --brand: #642667;
+  --brand-dark: #57195a;
+  --brand-deep: #510040;
+  --accent: #642667;
+  --ok: #2f7d4a;
+  --bad: #b42318;
+  --warn: #b54708;
+  margin: 0;
+  font-family: Poppins, system-ui, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  background:
+    radial-gradient(900px 420px at 85% -10%, color-mix(in srgb, var(--brand) 18%, white), transparent 60%),
+    radial-gradient(700px 380px at 0% 100%, color-mix(in srgb, var(--brand-deep) 10%, white), transparent 55%),
+    var(--bg);
+}
+body.view-hamamatsu main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3rem;
+}
+body.view-hamamatsu h1 {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+body.view-hamamatsu .lede {
+  color: var(--muted);
+  margin: 0 0 1.35rem;
+  max-width: 44rem;
+  line-height: 1.45;
+}
+body.view-hamamatsu .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+  align-items: center;
+}
+body.view-hamamatsu button,
+body.view-hamamatsu .file-btn {
+  appearance: none;
+  border: 1px solid #c9ced3;
+  background: #fff;
+  color: var(--text);
+  padding: 0.65rem 0.95rem;
+  border-radius: 5px;
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+body.view-hamamatsu button.primary,
+body.view-hamamatsu .file-btn.primary {
+  background: var(--brand);
+  color: #ffffff;
+  border-color: var(--brand);
+  font-weight: 600;
+}
+body.view-hamamatsu button.primary:hover,
+body.view-hamamatsu .file-btn.primary:hover {
+  background: var(--brand-dark);
+  border-color: var(--brand-dark);
+}
+body.view-hamamatsu button.active {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+body.view-hamamatsu button:disabled,
+body.view-hamamatsu .file-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+body.view-hamamatsu .process-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 1rem 0;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+body.view-hamamatsu .process-actions {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+  align-items: stretch;
+  max-width: 100%;
+}
+body.view-hamamatsu .process-actions > button {
+  width: 100%;
+  min-height: 3rem;
+}
+body.view-hamamatsu #btnProcess {
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  border-width: 1px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.15s ease;
+}
+body.view-hamamatsu #btnProcess:disabled {
+  opacity: 0.45;
+  background: #f0f1f3;
+  color: var(--muted);
+  border-color: #c9ced3;
+  box-shadow: none;
+}
+body.view-hamamatsu #btnProcess.is-ready {
+  background: var(--brand);
+  color: #ffffff;
+  border-color: var(--brand);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--brand) 35%, transparent),
+    0 8px 22px color-mix(in srgb, var(--brand) 28%, transparent);
+  animation: processReady 1.4s ease-in-out 2;
+}
+body.view-hamamatsu #btnProcess.is-ready:hover {
+  background: var(--brand-dark);
+  border-color: var(--brand-dark);
+  transform: translateY(-1px);
+}
+@keyframes processReady {
+  0%, 100% {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--brand) 35%, transparent),
+      0 8px 22px color-mix(in srgb, var(--brand) 28%, transparent);
+  }
+  50% {
+    box-shadow:
+      0 0 0 4px color-mix(in srgb, var(--brand) 22%, transparent),
+      0 10px 26px color-mix(in srgb, var(--brand) 36%, transparent);
+  }
+}
+body.view-hamamatsu #processHint {
+  display: none;
+  margin: 0;
+  color: var(--brand);
+  font-size: 0.92rem;
+  line-height: 1.4;
+  font-weight: 550;
+}
+body.view-hamamatsu #processHint.visible { display: block; }
+body.view-hamamatsu .panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 10px 28px rgba(1, 7, 39, 0.05);
+}
+body.view-hamamatsu .panel h2 {
+  margin: 0 0 0.65rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+body.view-hamamatsu .choice-grid {
+  display: grid;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+@media (min-width: 720px) {
+  body.view-hamamatsu .choice-grid { grid-template-columns: 1.35fr 1fr; }
+}
+body.view-hamamatsu .choice {
+  border: 1px solid #c9ced3;
+  border-radius: 10px;
+  padding: 1rem 1.05rem;
+  background: #fafafa;
+  text-align: left;
+  width: 100%;
+  display: block;
+}
+body.view-hamamatsu .choice:hover {
+  background: #fff;
+  border-color: color-mix(in srgb, var(--brand) 35%, #c9ced3);
+}
+body.view-hamamatsu .choice .eyebrow {
+  display: inline-block;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 0.35rem;
+  font-weight: 700;
+}
+body.view-hamamatsu .choice .title {
+  font-size: 1.1rem;
+  font-weight: 650;
+  margin-bottom: 0.35rem;
+  color: var(--text);
+}
+body.view-hamamatsu .choice .desc {
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0 0 0.85rem;
+}
+body.view-hamamatsu .choice.selected {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+  background: #fff;
+}
+body.view-hamamatsu #statusPanel { display: none; }
+body.view-hamamatsu .status-list {
+  display: grid;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+body.view-hamamatsu .status-list li {
+  padding: 0.7rem 0.75rem;
+  border: 1px solid #c9ced3;
+  border-radius: 8px;
+  background: #fafafa;
+  font-size: 0.9rem;
+}
+body.view-hamamatsu .status-list li.ready {
+  border-color: color-mix(in srgb, var(--ok) 45%, #c9ced3);
+  background: color-mix(in srgb, var(--ok) 6%, white);
+}
+body.view-hamamatsu .status-list li.error {
+  border-color: color-mix(in srgb, var(--bad) 45%, #c9ced3);
+  background: color-mix(in srgb, var(--bad) 6%, white);
+}
+body.view-hamamatsu .status-list .status-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+body.view-hamamatsu .status-list .key { font-weight: 650; }
+body.view-hamamatsu .status-list .help {
+  color: var(--muted);
+  font-size: 0.84rem;
+  line-height: 1.35;
+  margin-top: 0.3rem;
+}
+body.view-hamamatsu .status-list .status-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+body.view-hamamatsu .status-list .state {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+}
+body.view-hamamatsu .status-list .state.ok { color: var(--ok); }
+body.view-hamamatsu .status-list .state.warn { color: var(--warn); }
+body.view-hamamatsu .status-list .state.bad { color: var(--bad); }
+body.view-hamamatsu .status-list .spinner {
+  display: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 1.5px solid color-mix(in srgb, var(--brand) 25%, transparent);
+  border-top-color: var(--brand);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: statusSpin 0.7s linear infinite;
+}
+body.view-hamamatsu .status-list .spinner.on { display: inline-block; }
+@keyframes statusSpin {
+  to { transform: rotate(360deg); }
+}
+body.view-hamamatsu .upload-actions {
+  display: none;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin-top: 0.65rem;
+}
+body.view-hamamatsu #statusPanel.is-local .upload-actions { display: flex; }
+body.view-hamamatsu .upload-hint {
+  display: none;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
+  margin: 0 0 0.75rem;
+}
+body.view-hamamatsu #statusPanel.is-local .upload-hint { display: block; }
+body.view-hamamatsu .status-list input[type="file"] { display: none; }
+body.view-hamamatsu .file-name {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+body.view-hamamatsu #log {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  min-height: 4rem;
+  color: var(--muted);
+  max-height: 11rem;
+  overflow: auto;
+  background: #fafafa;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.75rem 0.85rem;
+}
+body.view-hamamatsu #log .ok { color: var(--ok); }
+body.view-hamamatsu #log .bad { color: var(--bad); }
+body.view-hamamatsu #log .warn { color: var(--warn); }
+body.view-hamamatsu #inputStage.hidden,
+body.view-hamamatsu #viewStage.hidden { display: none; }
+body.view-hamamatsu #viewStage {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(900px 420px at 85% -10%, color-mix(in srgb, var(--brand) 18%, white), transparent 60%),
+    radial-gradient(700px 380px at 0% 100%, color-mix(in srgb, var(--brand-deep) 10%, white), transparent 55%),
+    var(--bg);
+  padding: 1rem 1.25rem 1.5rem;
+  overflow: auto;
+}
+body.view-hamamatsu .view-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.1rem;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 0.85rem;
+  flex-shrink: 0;
+}
+body.view-hamamatsu .view-top h1 {
+  margin: 0;
+  font-size: 1.85rem;
+  letter-spacing: -0.02em;
+}
+body.view-hamamatsu #btnBack {
+  background: var(--brand);
+  color: #ffffff;
+  border-color: var(--brand);
+  font-weight: 700;
+  font-size: 1rem;
+  min-height: 2.75rem;
+  padding: 0.7rem 1.15rem;
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--brand) 28%, transparent);
+}
+body.view-hamamatsu #btnBack:hover {
+  background: var(--brand-dark);
+  border-color: var(--brand-dark);
+}
+body.view-hamamatsu .view-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+  flex-shrink: 0;
+}
+body.view-hamamatsu .view-primary-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 0.55rem;
+  align-items: stretch;
+}
+body.view-hamamatsu .accordion {
+  min-width: 0;
+  display: flex;
+}
+body.view-hamamatsu #btnShowIntermediate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  text-align: left;
+  padding: 0.7rem 0.85rem;
+  background: #fff;
+  min-height: 100%;
+}
+body.view-hamamatsu .accordion.open #btnShowIntermediate {
+  border-color: color-mix(in srgb, var(--brand) 40%, #c9ced3);
+  background: color-mix(in srgb, var(--brand) 8%, white);
+}
+body.view-hamamatsu .accordion-chevron {
+  flex-shrink: 0;
+  width: 1.1rem;
+  height: 1.1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brand);
+  font-size: 0.85rem;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+body.view-hamamatsu .accordion.open .accordion-chevron {
+  transform: rotate(90deg);
+}
+body.view-hamamatsu .accordion-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  min-width: 0;
+}
+body.view-hamamatsu .accordion-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 16rem));
+  gap: 0.55rem;
+  justify-content: start;
+  padding: 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 10px 28px rgba(1, 7, 39, 0.05);
+}
+body.view-hamamatsu #viewStage .view-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 16rem));
+  gap: 0.55rem;
+  justify-content: start;
+}
+body.view-hamamatsu #viewStage .accordion-panel.hidden {
+  display: none;
+}
+body.view-hamamatsu #viewFinalButtons {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+}
+body.view-hamamatsu #viewStage .view-controls > button,
+body.view-hamamatsu #viewFinalButtons > button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  text-align: left;
+  padding: 0.7rem 0.8rem;
+  min-height: 100%;
+  width: 100%;
+  line-height: 1.35;
+  background: #fff;
+}
+body.view-hamamatsu #viewStage .view-controls > button {
+  max-width: 16rem;
+}
+body.view-hamamatsu #viewStage .view-controls .stage-name,
+body.view-hamamatsu #viewFinalButtons .stage-name,
+body.view-hamamatsu .accordion-copy .stage-name {
+  font-weight: 650;
+  color: var(--text);
+}
+body.view-hamamatsu #viewStage .view-controls .stage-desc,
+body.view-hamamatsu #viewFinalButtons .stage-desc,
+body.view-hamamatsu .accordion-copy .stage-desc {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+body.view-hamamatsu #viewStage .view-controls > button.active,
+body.view-hamamatsu #viewFinalButtons > button.active {
+  background: color-mix(in srgb, var(--brand) 8%, white);
+  border-color: color-mix(in srgb, var(--brand) 45%, #c9ced3);
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+body.view-hamamatsu #viewDisplay {
+  margin: 0;
+  flex: 1 1 auto;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(1, 7, 39, 0.05);
+}
+body.view-hamamatsu #viewDisplay.hidden { display: none; }
+body.view-hamamatsu figcaption {
+  padding: 0.55rem 0.8rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+  flex-shrink: 0;
+}
+body.view-hamamatsu #viewLabel { color: var(--text); font-weight: 600; }
+body.view-hamamatsu #viewMeta { color: var(--muted); font-size: 0.82rem; }
+body.view-hamamatsu .canvas-wrap {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+  padding: 0.75rem;
+  background: #111;
+}
+body.view-hamamatsu canvas {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: calc(100vh - 18rem);
+  image-rendering: pixelated;
+  background: #000;
+}
+@media (max-width: 720px) {
+  body.view-hamamatsu .view-top h1 { font-size: 1.45rem; }
+  body.view-hamamatsu #viewDisplay { flex: 0 0 auto; }
+  body.view-hamamatsu canvas { max-height: min(55vh, 24rem); }
+}
+body.view-hamamatsu .page-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+body.view-hamamatsu .page-header h1 { margin: 0; }
+body.view-hamamatsu .home-link {
+  margin: 0 0 0.35rem;
+  font-size: 0.88rem;
+}
+body.view-hamamatsu .home-link a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 500;
+}
+body.view-hamamatsu .home-link a:hover { text-decoration: underline; color: var(--brand-dark); }
+body.view-hamamatsu #btnExplain {
+  font-weight: 600;
+  white-space: nowrap;
+}
+body.view-hamamatsu #explainModal.hidden { display: none; }
+body.view-hamamatsu #explainModal {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: color-mix(in srgb, #1a1a1a 45%, transparent);
+}
+body.view-hamamatsu .explain-card {
+  width: min(40rem, 100%);
+  max-height: min(90vh, 44rem);
+  overflow: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.15rem 1.25rem 1.25rem;
+  box-shadow: 0 18px 50px rgba(1, 7, 39, 0.18);
+}
+body.view-hamamatsu .explain-card header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+body.view-hamamatsu .explain-card h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+body.view-hamamatsu .explain-card h3 {
+  margin: 1.1rem 0 0.4rem;
+  font-size: 0.95rem;
+  color: var(--brand);
+}
+body.view-hamamatsu .explain-card p,
+body.view-hamamatsu .explain-card li {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
+  margin: 0 0 0.55rem;
+}
+body.view-hamamatsu .explain-card ul {
+  margin: 0 0 0.55rem;
+  padding-left: 1.15rem;
+}
+body.view-hamamatsu .explain-card .formula {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.88rem;
+  color: var(--text);
+  background: color-mix(in srgb, var(--brand) 6%, #f4f5f7);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.7rem 0.85rem;
+  margin: 0.45rem 0 0.7rem;
+  overflow-x: auto;
+}
+
+/* Dentist button cascade guards */
+body.view-dentist button,
+body.view-dentist .btn {
+  border: 1px solid #c9ced3;
+  background: #fff;
+  color: #1a1a1a;
+}
+body.view-dentist button.primary,
+body.view-dentist .btn.primary,
+body.view-dentist .btn-new-patient {
+  border: 1px solid var(--brand);
+  background: var(--brand);
+  color: #ffffff;
+}
+body.view-dentist button.danger {
+  border: 1px solid #e0a0a0;
+  background: #fff;
+  color: #9b1c1c;
+}
+body.view-dentist .dentist-card {
+  border: 1px solid #c9ced3;
+  background: #fafafa;
+}
+body.view-dentist .visit-item {
+  border: 1px solid #c9ced3;
+  background: #fafafa;
+}
+body.view-dentist .btn-back {
+  border: 1px solid #c9ced3;
+  background: #fff;
+  color: var(--brand);
+}
+body.view-dentist .btn-back:hover {
+  background: color-mix(in srgb, var(--brand) 8%, white);
+  border-color: color-mix(in srgb, var(--brand) 40%, #c9ced3);
+  color: var(--brand-dark);
+}
+body.view-dentist .breadcrumbs button {
+  border: none;
+  background: transparent;
+  color: var(--brand);
+}
+  
+  </style>
+</head>
+<body class="view-home">
+  <div id="app" class="app-root"></div>
+
+  <div class="overlay hidden" id="appDialog" role="dialog" aria-modal="true" aria-labelledby="appDialogTitle" aria-hidden="true">
+    <div class="overlay-card info" id="appDialogCard">
+      <h3 id="appDialogTitle"></h3>
+      <p id="appDialogMessage"></p>
+      <div class="form-actions">
+        <button type="button" id="appDialogCancel">Cancel</button>
+        <button type="button" class="primary" id="appDialogConfirm">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <template id="tpl-home">
+<header>
+    <div class="brand-row">
+      <div class="mark">A</div>
+      <div>
+        <div class="brand-name">ALERIO</div>
+        <div class="brand-sub">Clinic &amp; decoding demo</div>
+      </div>
+    </div>
+  </header>
+  <main>
+    <h1>Choose where to start</h1>
+    <p class="lede">
+      Two connected demos: a dentist chairside workflow with patients and X-ray
+      capture, and an engineering view of the Hamamatsu Decoding Pipeline.
+    </p>
+    <div class="routes">
+      <a class="route" href="#dentist" data-route="dentist">
+        <div class="eyebrow">Clinical demo</div>
+        <h2>Dentist GUI</h2>
+        <p>
+          Select a dentist, browse sample patients, record visits, and capture
+          X-rays for each appointment.
+        </p>
+        <span class="cta">Open dentist workspace →</span>
+      </a>
+      <a class="route" href="#hamamatsu" data-route="hamamatsu">
+        <div class="eyebrow">Engineering</div>
+        <h2>Hamamatsu Decoding Pipeline</h2>
+        <p>
+          Load the four frames, inspect dark and shading correction steps, and
+          review intermediate outputs used under the hood.
+        </p>
+        <span class="cta">Open decoding pipeline →</span>
+      </a>
+    </div>
+  </main>
+  </template>
+  <template id="tpl-dentist">
+<header class="app-bar">
+    <div class="app-bar-inner">
+      <a class="brand" href="#home" data-route="home">
+        <div class="mark">A</div>
+        <div>
+          <strong>ALERIO</strong>
+          <span>Dentist workspace</span>
+        </div>
+      </a>
+      <div class="who" id="whoLine">No dentist selected</div>
+    </div>
+  </header>
+  <nav class="breadcrumbs" id="dentistBreadcrumbs" aria-label="Breadcrumb"></nav>
+
+  <main>
+    <section class="screen" id="screenDentists">
+      <h1>Select dentist</h1>
+      <p class="lede">
+        No login required for this demo. All dentists share the same clinic patient list.
+      </p>
+      <div class="panel">
+        <div class="grid-dentists" id="dentistGrid"></div>
+      </div>
+    </section>
+
+    <section class="screen hidden" id="screenPatients">
+      <div class="toolbar">
+        <div class="left">
+          <button type="button" class="btn-back" id="btnChangeDentist" aria-label="Change dentist" title="Change dentist">
+            <svg class="btn-back-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <h1 style="margin:0;font-size:1.45rem;">Patients</h1>
+        </div>
+        <div class="right">
+          <button type="button" class="primary btn-new-patient" id="btnNewPatient">
+            <span class="btn-plus" aria-hidden="true">+</span>
+            New patient
+          </button>
+        </div>
+      </div>
+      <div class="panel">
+        <table>
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Name of patient</th>
+              <th>Last visit</th>
+            </tr>
+          </thead>
+          <tbody id="patientTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="screen hidden" id="screenNewPatient">
+      <div class="toolbar">
+        <div class="left">
+          <button type="button" class="btn-back" id="btnCancelNewPatient" aria-label="Back to patients" title="Back to patients">
+            <svg class="btn-back-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <h1 style="margin:0;font-size:1.45rem;">New patient</h1>
+        </div>
+      </div>
+      <div class="panel">
+        <p class="lede" style="margin-bottom:1rem;">
+          Patient ID is assigned automatically. First visit date is set to today when the record is created.
+        </p>
+        <form id="newPatientForm">
+          <label for="patientName">Full name</label>
+          <input id="patientName" type="text" required maxlength="120" placeholder="Patient full name" />
+          <label for="patientAddress">Address <span class="muted">(optional)</span></label>
+          <input id="patientAddress" type="text" maxlength="240" placeholder="Street, city" />
+          <label for="patientPhone">Phone <span class="muted">(optional)</span></label>
+          <input id="patientPhone" type="tel" maxlength="20" placeholder="e.g. 98765 43210" />
+          <div class="gender-field">
+            <label>Gender</label>
+            <div class="gender-options">
+              <label><input type="radio" name="patientGender" value="male" required /> Male</label>
+              <label><input type="radio" name="patientGender" value="female" required /> Female</label>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="primary">Create patient</button>
+            <button type="button" id="btnCancelNewPatient2">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section class="screen hidden" id="screenPatient">
+      <div class="toolbar">
+        <div class="left">
+          <button type="button" class="btn-back" id="btnBackPatients" aria-label="Back to patients" title="Back to patients">
+            <svg class="btn-back-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="person-heading">
+            <img class="avatar lg" id="patientAvatar" alt="" />
+            <h1 style="margin:0;font-size:1.45rem;" id="patientTitle">Patient</h1>
+          </div>
+        </div>
+      </div>
+      <div class="meta-chips" id="patientChips"></div>
+      <div class="action-banner">
+        <p>Start a new appointment for this patient to add notes and capture X-rays.</p>
+        <button type="button" class="primary" id="btnNewVisit">New visit</button>
+      </div>
+      <div class="panel">
+        <h2>Past Visits</h2>
+        <div class="visit-list" id="visitList"></div>
+      </div>
+    </section>
+
+    <section class="screen hidden" id="screenVisit">
+      <div class="toolbar">
+        <div class="left">
+          <button type="button" class="btn-back" id="btnBackPatient" aria-label="Back to patient" title="Back to patient">
+            <svg class="btn-back-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M15.5 4.5 8 12l7.5 7.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <h1 style="margin:0;font-size:1.45rem;" id="visitTitle">Visit</h1>
+        </div>
+      </div>
+      <div class="meta-chips" id="visitChips"></div>
+      <div class="panel">
+        <h2>X-ray scans</h2>
+        <div class="action-banner" style="margin-top:0.25rem;">
+          <p>Capture an X-ray for this visit. New scans are kept unless you discard them. You can take more than one.</p>
+          <button type="button" class="primary" id="btnTakeXray">Take X-ray</button>
+        </div>
+        <div class="scan-grid" id="scanGrid"></div>
+        <div class="empty hidden" id="scanEmpty">No scans for this visit yet.</div>
+      </div>
+      <div class="panel">
+        <h2>Visit notes</h2>
+        <textarea id="visitNotes" placeholder="Freestyle clinical notes for this visit…"></textarea>
+        <h2>Medicine prescription</h2>
+        <p class="lede" style="margin-bottom:0.55rem;">Optional. Record medicines prescribed during this visit, if any.</p>
+        <textarea id="visitPrescription" placeholder="e.g. Amoxicillin 500 mg — 1 capsule thrice daily for 5 days"></textarea>
+        <div class="form-actions">
+          <button type="button" class="primary" id="btnSaveNotes">Save visit details</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="overlay hidden" id="busyOverlay" aria-live="polite">
+    <div class="overlay-card">
+      <svg class="tooth-spinner" viewBox="0 0 64 78" aria-hidden="true">
+        <path class="tooth-guide" pathLength="100" d="M22 14c-6 1-10 8-10 16 0 7 2 12 1 18-2 10-3 20 3 26 4 4 8 1 9-7 1-8 3-14 7-16 4 2 6 8 7 16 1 8 5 11 9 7 6-6 5-16 3-26-1-6 1-11 1-18 0-8-4-15-10-16-4-1-7 4-10 6-3-2-6-7-10-6z"/>
+        <path class="tooth-draw" pathLength="100" d="M22 14c-6 1-10 8-10 16 0 7 2 12 1 18-2 10-3 20 3 26 4 4 8 1 9-7 1-8 3-14 7-16 4 2 6 8 7 16 1 8 5 11 9 7 6-6 5-16 3-26-1-6 1-11 1-18 0-8-4-15-10-16-4-1-7 4-10 6-3-2-6-7-10-6z"/>
+      </svg>
+      <div id="busyText">Capturing X-ray…</div>
+    </div>
+  </div>
+  <div class="overlay hidden" id="demoXrayModal" role="dialog" aria-modal="true" aria-labelledby="demoXrayTitle">
+    <div class="overlay-card info">
+      <h3 id="demoXrayTitle">Demo X-ray</h3>
+      <p>
+        Because this is a demo, we are using the in-built sample data for now.
+        The image shown is the final corrected sample frame, not a live sensor capture.
+      </p>
+      <div class="form-actions">
+        <button type="button" class="primary" id="btnCloseDemoXray">Got it</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast hidden" id="toast"></div>
+  </template>
+  <template id="tpl-hamamatsu">
+<main>
+    <div id="inputStage">
+      <div class="page-header">
+        <div>
+          <p class="home-link"><a href="#home" data-route="home">← ALERIO demo home</a></p>
+          <h1>Hamamatsu Decoding</h1>
+        </div>
+        <button id="btnExplain" type="button">Explain the algorithm</button>
+      </div>
+      <p class="lede">
+        Load the four acquisition frames, run dark and shading correction in the
+        browser, then inspect raw, intermediate, and final images.
+      </p>
+
+      <section class="panel">
+        <h2>1. Choose input source</h2>
+        <div class="choice-grid">
+          <button type="button" class="choice" id="btnSample">
+            <div class="eyebrow">Recommended</div>
+            <div class="title">Use sample data</div>
+            <div class="desc">
+              Use the in-built sample set of all four frames (Idr, Ido, Ixr, Ixo).
+              Best for trying the tool quickly.
+            </div>
+          </button>
+          <button type="button" class="choice" id="btnUploadMode">
+            <div class="eyebrow">Optional</div>
+            <div class="title">Upload my files</div>
+            <div class="desc">
+              Provide your own four raw detector dumps from this computer.
+              You must supply all four; they cannot be mixed with the sample set.
+            </div>
+          </button>
+        </div>
+
+        <div class="process-row">
+          <p id="processHint">All four frames are ready. Click the button below to continue.</p>
+          <div class="process-actions">
+            <button id="btnProcess" type="button">Process Frames and View Result</button>
+            <button id="btnClear" type="button">Clear</button>
+          </div>
+        </div>
+
+        <div id="statusPanel">
+          <h2>Frames</h2>
+          <p class="upload-hint">
+            Each local file must be exactly 3,012,016 bytes
+            (16-byte prefix + 1000×1506 little-endian uint16 pixels).
+          </p>
+          <ul class="status-list" id="statusList"></ul>
+          <div class="row" id="sampleRetry" style="margin-top: 0.75rem; margin-bottom: 0; display: none;">
+            <button id="btnRetrySample" type="button">Retry sample download</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Log</h2>
+        <div id="log">Ready. Most users should click “Use sample data”.</div>
+      </section>
+    </div>
+  </main>
+
+  <div id="explainModal" class="hidden" aria-hidden="true" role="dialog" aria-labelledby="explainTitle">
+    <div class="explain-card">
+      <header>
+        <h2 id="explainTitle">Calibration algorithm</h2>
+        <button id="btnCloseExplain" type="button">Close</button>
+      </header>
+      <p>
+        This tool applies Hamamatsu-style flat-panel correction in two stages:
+        dark subtraction, then shading (flat-field) correction. All four inputs
+        are 1000×1506 little-endian uint16 images after a 16-byte file prefix.
+      </p>
+
+      <h3>1. Input frames</h3>
+      <ul>
+        <li><strong>Idr</strong> — dark frame for the open-beam reference (X-rays off).</li>
+        <li><strong>Ido</strong> — dark frame for the object exposure (X-rays off).</li>
+        <li><strong>Ixr</strong> — open-beam X-ray reference (no object).</li>
+        <li><strong>Ixo</strong> — object X-ray exposure (phantom in the beam).</li>
+      </ul>
+
+      <h3>2. Dark correction</h3>
+      <p>
+        Remove detector offset from each X-ray image by subtracting its paired
+        dark frame. Negative results are clamped to zero:
+      </p>
+      <div class="formula">Icdr = max(Ixr − Idr, 0)</div>
+      <div class="formula">Icdo = max(Ixo − Ido, 0)</div>
+      <p>
+        <strong>Icdr</strong> is the dark-corrected reference;
+        <strong>Icdo</strong> is the dark-corrected object image.
+      </p>
+
+      <h3>3. Shading / flat-field correction</h3>
+      <p>
+        Normalize the object image by the open-beam response so detector gain
+        variation is removed. First compute a scaling constant
+        <strong>C</strong> as the mean of usable reference pixels
+        (Icdr &gt; 1):
+      </p>
+      <div class="formula">C = mean( Icdr<sub>i</sub> )  for all i where Icdr<sub>i</sub> &gt; 1</div>
+      <p>Then form the final shaded image pixel-wise:</p>
+      <div class="formula">Ics<sub>i</sub> = C × Icdo<sub>i</sub> / Icdr<sub>i</sub>   if Icdr<sub>i</sub> &gt; 1, else 0</div>
+      <p>
+        <strong>Ics</strong> is the final corrected radiograph shown by default
+        on the results screen. Intermediate frames (raw and dark-corrected) are
+        available there if you want to inspect each step.
+      </p>
+    </div>
+  </div>
+
+  <div id="viewStage" class="hidden" aria-hidden="true">
+    <div class="view-top">
+      <button id="btnBack" type="button" class="primary">← Back to inputs</button>
+      <h1>View Results</h1>
+    </div>
+    <div class="view-picker">
+      <div class="view-primary-row">
+        <div class="accordion" id="intermediateAccordion">
+          <button
+            id="btnShowIntermediate"
+            type="button"
+            aria-expanded="false"
+            aria-controls="viewIntermediateButtons"
+          >
+            <span class="accordion-chevron" aria-hidden="true">▸</span>
+            <span class="accordion-copy">
+              <span class="stage-name">View Calibration & Correction Stages</span>
+              <span class="stage-desc">Raw and dark-corrected frames used to build Ics</span>
+            </span>
+          </button>
+        </div>
+        <div id="viewFinalButtons"></div>
+      </div>
+      <div
+        class="accordion-panel view-controls hidden"
+        id="viewIntermediateButtons"
+        role="region"
+        aria-labelledby="btnShowIntermediate"
+      ></div>
+    </div>
+    <figure id="viewDisplay">
+      <figcaption>
+        <span id="viewLabel">No image yet</span>
+        <div id="viewMeta"></div>
+      </figcaption>
+      <div class="canvas-wrap">
+        <canvas id="canvas" width="1000" height="1506"></canvas>
+      </div>
+    </figure>
+  </div>
+
+  <div class="overlay hidden" id="sampleBusy" aria-live="polite">
+    <div class="overlay-card">
+      <svg class="tooth-spinner" viewBox="0 0 64 78" aria-hidden="true">
+        <path class="tooth-guide" pathLength="100" d="M22 14c-6 1-10 8-10 16 0 7 2 12 1 18-2 10-3 20 3 26 4 4 8 1 9-7 1-8 3-14 7-16 4 2 6 8 7 16 1 8 5 11 9 7 6-6 5-16 3-26-1-6 1-11 1-18 0-8-4-15-10-16-4-1-7 4-10 6-3-2-6-7-10-6z"/>
+        <path class="tooth-draw" pathLength="100" d="M22 14c-6 1-10 8-10 16 0 7 2 12 1 18-2 10-3 20 3 26 4 4 8 1 9-7 1-8 3-14 7-16 4 2 6 8 7 16 1 8 5 11 9 7 6-6 5-16 3-26-1-6 1-11 1-18 0-8-4-15-10-16-4-1-7 4-10 6-3-2-6-7-10-6z"/>
+      </svg>
+      <div>Downloading sample data…</div>
+    </div>
+  </div>
+  </template>
+
+  <script>
+/** In-app confirm and error dialog shared by both demos. */
+(function (global) {
+  const queue = [];
+  let active = null;
+
+  function nodes() {
+    return {
+      root: document.getElementById("appDialog"),
+      title: document.getElementById("appDialogTitle"),
+      message: document.getElementById("appDialogMessage"),
+      cancel: document.getElementById("appDialogCancel"),
+      confirm: document.getElementById("appDialogConfirm"),
+    };
+  }
+
+  function finish(result) {
+    const current = active;
+    if (!current) return;
+    active = null;
+    const ui = nodes();
+    ui.root.classList.add("hidden");
+    ui.root.setAttribute("aria-hidden", "true");
+    current.resolve(result);
+    const next = queue.shift();
+    if (next) show(next);
+  }
+
+  function show(job) {
+    active = job;
+    const ui = nodes();
+    ui.title.textContent = job.title;
+    ui.message.textContent = job.message;
+    ui.root.classList.remove("tone-error", "tone-warn");
+    if (job.tone) ui.root.classList.add("tone-" + job.tone);
+    ui.confirm.textContent = job.confirmLabel;
+    ui.confirm.classList.toggle("danger", !!job.danger);
+    ui.confirm.classList.toggle("primary", !job.danger);
+    ui.cancel.textContent = job.cancelLabel || "Cancel";
+    ui.cancel.classList.toggle("hidden", !job.cancelLabel);
+    ui.root.classList.remove("hidden");
+    ui.root.setAttribute("aria-hidden", "false");
+    (job.cancelLabel ? ui.cancel : ui.confirm).focus();
+  }
+
+  function enqueue(job) {
+    return new Promise((resolve) => {
+      job.resolve = resolve;
+      if (active) queue.push(job);
+      else show(job);
+    });
+  }
+
+  const ui = nodes();
+  ui.confirm.addEventListener("click", () => finish(true));
+  ui.cancel.addEventListener("click", () => finish(false));
+  ui.root.addEventListener("click", (ev) => {
+    if (ev.target === ui.root) finish(false);
+  });
+  document.addEventListener("keydown", (ev) => {
+    if (!active || ev.key !== "Escape") return;
+    ev.preventDefault();
+    finish(false);
+  });
+
+  global.AppDialog = {
+    confirm({ title, message, confirmLabel, cancelLabel, danger, tone }) {
+      return enqueue({
+        title: title || "Please confirm",
+        message: message || "",
+        confirmLabel: confirmLabel || "Continue",
+        cancelLabel: cancelLabel || "Cancel",
+        danger: !!danger,
+        tone: tone || "warn",
+      });
+    },
+    alert({ title, message, tone }) {
+      return enqueue({
+        title: title || "Notice",
+        message: message || "",
+        confirmLabel: "OK",
+        cancelLabel: "",
+        danger: false,
+        tone: tone || "error",
+      });
+    },
+  };
+})(window);
+
+/** IndexedDB persistence for the dentist clinic demo. */
+(function (global) {
+  const DB_NAME = "alerio-clinic-demo-v2";
+  const DB_VERSION = 1;
+  const S3_BASE =
+    "https://iatome-hamamatsu-xray-input-files.s3.ap-south-1.amazonaws.com";
+  const assetUrl = (name) => `${S3_BASE}/${name}`;
+
+  const SAMPLE_DENTISTS = [
+    {
+      id: "d1",
+      name: "Dr. Ananya Krishnan",
+      title: "Partner Dentist",
+      avatar: assetUrl("doctor-ananya.jpg"),
+    },
+    {
+      id: "d2",
+      name: "Dr. Rohan Mehta",
+      title: "Partner Dentist",
+      avatar: assetUrl("doctor-rohan.jpg"),
+    },
+    {
+      id: "d3",
+      name: "Dr. Priya Gupta",
+      title: "Partner Dentist",
+      avatar: assetUrl("doctor-priya.jpg"),
+    },
+  ];
+
+  // 10 male + 10 female Indian patient portraits.
+  const PATIENT_AVATARS = {
+    male: [
+      "patient-01.jpg",
+      "patient-03.jpg",
+      "patient-05.jpg",
+      "patient-08.jpg",
+      "patient-10.jpg",
+      "patient-11.jpg",
+      "patient-13.jpg",
+      "patient-15.jpg",
+      "patient-17.jpg",
+      "patient-19.jpg",
+    ].map(assetUrl),
+    female: [
+      "patient-02.jpg",
+      "patient-04.jpg",
+      "patient-06.jpg",
+      "patient-07.jpg",
+      "patient-09.jpg",
+      "patient-12.jpg",
+      "patient-14.jpg",
+      "patient-16.jpg",
+      "patient-18.jpg",
+      "patient-20.jpg",
+    ].map(assetUrl),
+  };
+
+  const ALL_PATIENT_AVATARS = [...PATIENT_AVATARS.male, ...PATIENT_AVATARS.female];
+
+  const SAMPLE_PATIENTS = [
+    { name: "Arjun Patel", address: "12 Lake View Road, Coimbatore", phone: "98765 43210", gender: "male", avatar: PATIENT_AVATARS.male[0] },
+    { name: "Meera Iyer", address: "45 Race Course, Coimbatore", phone: "98200 11882", gender: "female", avatar: PATIENT_AVATARS.female[0] },
+    { name: "Karthik Subramanian", address: "8 Avinashi Road, Coimbatore", phone: "94432 76001", gender: "male", avatar: PATIENT_AVATARS.male[1] },
+    { name: "Sneha Reddy", address: "22 RS Puram, Coimbatore", phone: "90080 44521", gender: "female", avatar: PATIENT_AVATARS.female[1] },
+    { name: "Vikram Joshi", address: "3 Peelamedu Cross, Coimbatore", phone: "99870 22334", gender: "male", avatar: PATIENT_AVATARS.male[2] },
+  ];
+
+  function pickPatientAvatar(gender, usedAvatars) {
+    const g = gender === "female" ? "female" : "male";
+    const gendered = PATIENT_AVATARS[g];
+    const used = new Set(usedAvatars || []);
+    const free = gendered.filter((a) => !used.has(a));
+    const pool = free.length ? free : gendered;
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  function openDb() {
+    return new Promise((resolve, reject) => {
+      const req = indexedDB.open(DB_NAME, DB_VERSION);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains("meta")) {
+          db.createObjectStore("meta", { keyPath: "key" });
+        }
+        if (!db.objectStoreNames.contains("dentists")) {
+          db.createObjectStore("dentists", { keyPath: "id" });
+        }
+        if (!db.objectStoreNames.contains("patients")) {
+          db.createObjectStore("patients", { keyPath: "id" });
+        }
+        if (!db.objectStoreNames.contains("visits")) {
+          const visits = db.createObjectStore("visits", { keyPath: "id" });
+          visits.createIndex("byPatient", "patientId", { unique: false });
+        }
+        if (!db.objectStoreNames.contains("scans")) {
+          const scans = db.createObjectStore("scans", { keyPath: "id" });
+          scans.createIndex("byVisit", "visitId", { unique: false });
+        }
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  function txDone(tx) {
+    return new Promise((resolve, reject) => {
+      tx.oncomplete = () => resolve();
+      tx.onerror = () => reject(tx.error);
+      tx.onabort = () => reject(tx.error || new Error("transaction aborted"));
+    });
+  }
+
+  function reqToPromise(req) {
+    return new Promise((resolve, reject) => {
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error);
+    });
+  }
+
+  async function getAll(storeName) {
+    const db = await openDb();
+    return reqToPromise(db.transaction(storeName).objectStore(storeName).getAll());
+  }
+
+  async function getById(storeName, id) {
+    const db = await openDb();
+    return reqToPromise(db.transaction(storeName).objectStore(storeName).get(id));
+  }
+
+  async function put(storeName, value) {
+    const db = await openDb();
+    const tx = db.transaction(storeName, "readwrite");
+    tx.objectStore(storeName).put(value);
+    await txDone(tx);
+    return value;
+  }
+
+  async function del(storeName, id) {
+    const db = await openDb();
+    const tx = db.transaction(storeName, "readwrite");
+    tx.objectStore(storeName).delete(id);
+    await txDone(tx);
+  }
+
+  async function getMeta(key, fallback) {
+    const row = await getById("meta", key);
+    return row ? row.value : fallback;
+  }
+
+  async function setMeta(key, value) {
+    return put("meta", { key, value });
+  }
+
+  function uid(prefix) {
+    return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
+  }
+
+  async function seedIfEmpty() {
+    const dentists = await getAll("dentists");
+    if (!dentists.length) {
+      const db = await openDb();
+      const tx = db.transaction("dentists", "readwrite");
+      for (const d of SAMPLE_DENTISTS) tx.objectStore("dentists").put(d);
+      await txDone(tx);
+    } else {
+      // Refresh sample dentist avatars/titles for existing demo DBs.
+      const db = await openDb();
+      const tx = db.transaction("dentists", "readwrite");
+      for (const d of SAMPLE_DENTISTS) tx.objectStore("dentists").put(d);
+      await txDone(tx);
+    }
+
+    const patients = await getAll("patients");
+    if (!patients.length) {
+      const now = Date.now();
+      const db = await openDb();
+      const tx = db.transaction(["patients", "meta"], "readwrite");
+      SAMPLE_PATIENTS.forEach((p, i) => {
+        const id = `P${String(i + 1).padStart(4, "0")}`;
+        tx.objectStore("patients").put({
+          id,
+          name: p.name,
+          address: p.address,
+          phone: p.phone || "",
+          gender: p.gender,
+          avatar: p.avatar,
+          firstVisitAt: now - (SAMPLE_PATIENTS.length - i) * 86400000,
+        });
+      });
+      tx.objectStore("meta").put({ key: "patientSeq", value: SAMPLE_PATIENTS.length });
+      await txDone(tx);
+    } else {
+      const seq = await getMeta("patientSeq", 0);
+      if (!seq) {
+        const max = patients.reduce((m, p) => {
+          const n = Number(String(p.id).replace(/^P/i, ""));
+          return Number.isFinite(n) ? Math.max(m, n) : m;
+        }, 0);
+        await setMeta("patientSeq", max);
+      }
+      const byName = Object.fromEntries(
+        SAMPLE_PATIENTS.map((p) => [
+          p.name,
+          { avatar: p.avatar, gender: p.gender, phone: p.phone || "" },
+        ])
+      );
+      for (const p of patients) {
+        let changed = false;
+        const sample = byName[p.name];
+        if (sample) {
+          if (p.avatar !== sample.avatar) {
+            p.avatar = sample.avatar;
+            changed = true;
+          }
+          if (p.gender !== sample.gender) {
+            p.gender = sample.gender;
+            changed = true;
+          }
+          if (!p.phone && sample.phone) {
+            p.phone = sample.phone;
+            changed = true;
+          }
+        } else {
+          if (p.gender !== "male" && p.gender !== "female") {
+            p.gender = PATIENT_AVATARS.female.includes(p.avatar) ? "female" : "male";
+            changed = true;
+          }
+          if (!p.avatar || !ALL_PATIENT_AVATARS.includes(p.avatar)) {
+            p.avatar = pickPatientAvatar(
+              p.gender,
+              patients.map((x) => x.avatar)
+            );
+            changed = true;
+          }
+        }
+        if (changed) await put("patients", p);
+      }
+    }
+
+    await backfillVisitDentistNames();
+  }
+
+  async function nextPatientId() {
+    const seq = (await getMeta("patientSeq", 0)) + 1;
+    await setMeta("patientSeq", seq);
+    return `P${String(seq).padStart(4, "0")}`;
+  }
+
+  async function createPatient({ name, address, phone, gender }) {
+    const g = gender === "female" ? "female" : "male";
+    const existing = await getAll("patients");
+    const usedSameGender = existing
+      .filter((p) => p.gender === g)
+      .map((p) => p.avatar);
+    const id = await nextPatientId();
+    const patient = {
+      id,
+      name: name.trim(),
+      address: (address || "").trim(),
+      phone: (phone || "").trim(),
+      gender: g,
+      avatar: pickPatientAvatar(g, usedSameGender),
+      firstVisitAt: Date.now(),
+    };
+    await put("patients", patient);
+    return patient;
+  }
+
+  async function listPatients() {
+    const patients = await getAll("patients");
+    patients.sort((a, b) => a.id.localeCompare(b.id));
+    return patients;
+  }
+
+  async function listDentists() {
+    return getAll("dentists");
+  }
+
+  async function listVisitsForPatient(patientId) {
+    const db = await openDb();
+    const idx = db.transaction("visits").objectStore("visits").index("byPatient");
+    const visits = await reqToPromise(idx.getAll(patientId));
+    visits.sort((a, b) => b.createdAt - a.createdAt);
+    return visits;
+  }
+
+  async function createVisit({ patientId, dentistId, dentistName, notes, prescription }) {
+    const visit = {
+      id: uid("v"),
+      patientId,
+      dentistId,
+      dentistName: dentistName || "",
+      notes: notes || "",
+      prescription: prescription || "",
+      createdAt: Date.now(),
+    };
+    await put("visits", visit);
+    return visit;
+  }
+
+  async function backfillVisitDentistNames() {
+    const visits = await getAll("visits");
+    const missing = visits.filter((v) => !v.dentistName && v.dentistId);
+    if (!missing.length) return;
+    const dentists = await getAll("dentists");
+    const byId = Object.fromEntries(dentists.map((d) => [d.id, d]));
+    for (const v of missing) {
+      const d = byId[v.dentistId];
+      if (!d) continue;
+      v.dentistName = d.name;
+      await put("visits", v);
+    }
+  }
+
+  async function updateVisitNotes(visitId, notes, prescription) {
+    const visit = await getById("visits", visitId);
+    if (!visit) throw new Error("Visit not found");
+    visit.notes = notes;
+    visit.prescription = prescription || "";
+    await put("visits", visit);
+    return visit;
+  }
+
+  async function listScansForVisit(visitId) {
+    const db = await openDb();
+    const idx = db.transaction("scans").objectStore("scans").index("byVisit");
+    const scans = await reqToPromise(idx.getAll(visitId));
+    scans.sort((a, b) => b.createdAt - a.createdAt);
+    return scans;
+  }
+
+  async function addScan({ visitId, patientId, dentistId, imageBlob, width, height }) {
+    const scan = {
+      id: uid("s"),
+      visitId,
+      patientId,
+      dentistId,
+      createdAt: Date.now(),
+      imageBlob,
+      width,
+      height,
+    };
+    await put("scans", scan);
+    return scan;
+  }
+
+  async function discardScan(scanId) {
+    await del("scans", scanId);
+  }
+
+  global.ClinicDB = {
+    seedIfEmpty,
+    listDentists,
+    getDentist: (id) => getById("dentists", id),
+    listPatients,
+    getPatient: (id) => getById("patients", id),
+    createPatient,
+    listVisitsForPatient,
+    getVisit: (id) => getById("visits", id),
+    createVisit,
+    updateVisitNotes,
+    listScansForVisit,
+    addScan,
+    discardScan,
+    getScan: (id) => getById("scans", id),
+    backfillVisitDentistNames,
+  };
+})(window);
+
+
+/** Shared Hamamatsu sample download + dark/shading correction for Ics. */
+(function (global) {
+  const S3_BASE =
+    "https://iatome-hamamatsu-xray-input-files.s3.ap-south-1.amazonaws.com";
+  const KEYS = ["Idr", "Ido", "Ixr", "Ixo"];
+  const HEADER_BYTES = 16;
+  const WIDTH = 1000;
+  const HEIGHT = 1506;
+  const NPIXELS = WIDTH * HEIGHT;
+  const EXPECTED_SIZE = HEADER_BYTES + NPIXELS * 2;
+  const REF_EPS = 1;
+
+  function parseFrameBuffer(buf, label) {
+    if (buf.byteLength !== EXPECTED_SIZE) {
+      throw new Error(
+        `${label}: size ${buf.byteLength} bytes, expected ${EXPECTED_SIZE}`
+      );
+    }
+    const u16 = new Uint16Array(buf, HEADER_BYTES, NPIXELS);
+    const f32 = new Float32Array(NPIXELS);
+    for (let i = 0; i < NPIXELS; i++) f32[i] = u16[i];
+    return f32;
+  }
+
+  async function downloadSampleFrame(key) {
+    const name = `${key}.bin`;
+    const url = `${S3_BASE}/${name}`;
+    const res = await fetch(url, { mode: "cors", cache: "no-store" });
+    if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
+    const buf = await res.arrayBuffer();
+    return parseFrameBuffer(buf, name);
+  }
+
+  function darkCorrect(ix, idark) {
+    const out = new Float32Array(NPIXELS);
+    for (let i = 0; i < NPIXELS; i++) {
+      const v = ix[i] - idark[i];
+      out[i] = v > 0 ? v : 0;
+    }
+    return out;
+  }
+
+  function shadingCorrect(icdo, icdr) {
+    let sum = 0;
+    let n = 0;
+    for (let i = 0; i < NPIXELS; i++) {
+      if (icdr[i] > REF_EPS) {
+        sum += icdr[i];
+        n++;
+      }
+    }
+    if (!n) throw new Error("no usable Icdr pixels");
+    const C = sum / n;
+    const ics = new Float32Array(NPIXELS);
+    for (let i = 0; i < NPIXELS; i++) {
+      ics[i] = icdr[i] > REF_EPS ? (C * icdo[i]) / icdr[i] : 0;
+    }
+    return { ics, C };
+  }
+
+  function percentileWindow(src) {
+    const sampleN = Math.min(200000, src.length);
+    const step = Math.max(1, Math.floor(src.length / sampleN));
+    const sample = new Float32Array(sampleN);
+    for (let i = 0; i < sampleN; i++) sample[i] = src[i * step];
+    sample.sort();
+    let lo = sample[Math.floor(sampleN * 0.01)];
+    let hi = sample[Math.floor(sampleN * 0.99)];
+    if (!(hi > lo)) hi = lo + 1;
+    return { lo, hi };
+  }
+
+  function renderIcsToPngBlob(ics) {
+    const { lo, hi } = percentileWindow(ics);
+    const canvas = document.createElement("canvas");
+    canvas.width = WIDTH;
+    canvas.height = HEIGHT;
+    const ctx = canvas.getContext("2d");
+    const img = ctx.createImageData(WIDTH, HEIGHT);
+    const d = img.data;
+    const scale = 255 / (hi - lo);
+    for (let i = 0; i < NPIXELS; i++) {
+      let v = ics[i];
+      if (v <= lo) v = 0;
+      else if (v >= hi) v = 255;
+      else v = (v - lo) * scale;
+      const o = i * 4;
+      const g = v | 0;
+      d[o] = g;
+      d[o + 1] = g;
+      d[o + 2] = g;
+      d[o + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+    return new Promise((resolve, reject) => {
+      canvas.toBlob(
+        (blob) => (blob ? resolve(blob) : reject(new Error("PNG encode failed"))),
+        "image/png"
+      );
+    });
+  }
+
+  async function captureFinalXrayPng() {
+    const frames = {};
+    await Promise.all(
+      KEYS.map(async (key) => {
+        frames[key] = await downloadSampleFrame(key);
+      })
+    );
+    const icdr = darkCorrect(frames.Ixr, frames.Idr);
+    const icdo = darkCorrect(frames.Ixo, frames.Ido);
+    const { ics, C } = shadingCorrect(icdo, icdr);
+    const pngBlob = await renderIcsToPngBlob(ics);
+    return { pngBlob, C, width: WIDTH, height: HEIGHT };
+  }
+
+  global.XrayPipeline = {
+    WIDTH,
+    HEIGHT,
+    captureFinalXrayPng,
+  };
+})(window);
+
+
+    function mountTemplate(id) {
+      const app = document.getElementById('app');
+      const tpl = document.getElementById(id);
+      app.replaceChildren(tpl.content.cloneNode(true));
+    }
+
+    function wireHomeLinks() {
+      document.querySelectorAll('[data-route]').forEach((el) => {
+        el.addEventListener('click', (ev) => {
+          ev.preventDefault();
+          const route = el.getAttribute('data-route');
+          location.hash = route;
+        });
+      });
+    }
+
+    function initDentist() {
+
+    const DENTIST_SS_KEY = "alerio-clinic-dentist-id";
+    const state = {
+      dentist: null,
+      patient: null,
+      visit: null,
+      objectUrls: [],
+      screen: "dentists",
+    };
+
+    const screens = {
+      dentists: document.getElementById("screenDentists"),
+      patients: document.getElementById("screenPatients"),
+      newPatient: document.getElementById("screenNewPatient"),
+      patient: document.getElementById("screenPatient"),
+      visit: document.getElementById("screenVisit"),
+    };
+
+    let syncing = false;
+
+    function showScreen(name) {
+      state.screen = name;
+      for (const key of Object.keys(screens)) {
+        screens[key].classList.toggle("hidden", key !== name);
+      }
+      renderBreadcrumbs(name);
+    }
+
+    function currentHashPath() {
+      return (location.hash || "").replace(/^#/, "") || "home";
+    }
+
+    function go(path) {
+      const next = String(path || "dentist").replace(/^#/, "");
+      if (currentHashPath() === next) {
+        syncFromHash(next);
+        return;
+      }
+      location.hash = next;
+    }
+
+    function persistDentist(dentist) {
+      if (dentist && dentist.id) sessionStorage.setItem(DENTIST_SS_KEY, dentist.id);
+      else sessionStorage.removeItem(DENTIST_SS_KEY);
+    }
+
+    async function ensureDentist() {
+      if (state.dentist) return state.dentist;
+      const id = sessionStorage.getItem(DENTIST_SS_KEY);
+      if (!id) return null;
+      state.dentist = await ClinicDB.getDentist(id);
+      return state.dentist;
+    }
+
+    function renderBreadcrumbs(screen) {
+      const nav = document.getElementById("dentistBreadcrumbs");
+      if (!nav) return;
+
+      const dentistLabel = state.dentist ? state.dentist.name : "Dentist";
+      const crumbs = [{ label: "Demo home", action: "home" }];
+
+      if (screen === "dentists") {
+        crumbs.push({ label: "Select dentist", current: true });
+      } else {
+        crumbs.push({ label: "Select dentist", action: "dentists" });
+        crumbs.push({ label: dentistLabel, action: "patients" });
+
+        if (screen === "patients") {
+          crumbs.push({ label: "Patients", current: true });
+        } else if (screen === "newPatient") {
+          crumbs.push({ label: "Patients", action: "patients" });
+          crumbs.push({ label: "New patient", current: true });
+        } else if (screen === "patient") {
+          crumbs.push({ label: "Patients", action: "patients" });
+          crumbs.push({
+            label: state.patient ? state.patient.name : "Patient",
+            current: true,
+          });
+        } else if (screen === "visit") {
+          crumbs.push({ label: "Patients", action: "patients" });
+          crumbs.push({
+            label: state.patient ? state.patient.name : "Patient",
+            action: "patient",
+          });
+          crumbs.push({
+            label: state.visit
+              ? `Visit · ${fmtDate(state.visit.createdAt)}`
+              : "Visit",
+            current: true,
+          });
+        }
+      }
+
+      nav.innerHTML = "";
+      crumbs.forEach((crumb, i) => {
+        if (i > 0) {
+          const sep = document.createElement("span");
+          sep.className = "crumb-sep";
+          sep.textContent = "/";
+          sep.setAttribute("aria-hidden", "true");
+          nav.appendChild(sep);
+        }
+        if (crumb.current) {
+          const span = document.createElement("span");
+          span.className = "crumb-current";
+          span.textContent = crumb.label;
+          span.setAttribute("aria-current", "page");
+          nav.appendChild(span);
+        } else {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.textContent = crumb.label;
+          btn.addEventListener("click", () => navigateBreadcrumb(crumb.action));
+          nav.appendChild(btn);
+        }
+      });
+    }
+
+    function navigateBreadcrumb(action) {
+      if (action === "home") {
+        location.hash = "home";
+        return;
+      }
+      if (action === "dentists") {
+        go("dentist");
+        return;
+      }
+      if (action === "patients") {
+        go("dentist/patients");
+        return;
+      }
+      if (action === "patient" && state.patient) {
+        go(`dentist/patient/${state.patient.id}`);
+      }
+    }
+
+    function fmtDate(ts) {
+      return new Date(ts).toLocaleString(undefined, {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+
+    function fmtLastVisit(ts) {
+      const d = new Date(ts);
+      const now = new Date();
+      const time = d.toLocaleString(undefined, {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+      if (
+        d.getFullYear() === now.getFullYear() &&
+        d.getMonth() === now.getMonth() &&
+        d.getDate() === now.getDate()
+      ) {
+        return `Today, ${time}`;
+      }
+      const opts = {
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      };
+      if (d.getFullYear() !== now.getFullYear()) opts.year = "numeric";
+      return d.toLocaleString(undefined, opts);
+    }
+
+    function toast(msg, cls) {
+      const el = document.getElementById("toast");
+      el.textContent = msg;
+      el.className = `toast ${cls || ""}`.trim();
+      clearTimeout(toast._t);
+      toast._t = setTimeout(() => el.classList.add("hidden"), 3200);
+    }
+
+    function setBusy(show, text) {
+      document.getElementById("busyOverlay").classList.toggle("hidden", !show);
+      if (text) document.getElementById("busyText").textContent = text;
+    }
+
+    function updateWho() {
+      const el = document.getElementById("whoLine");
+      if (!state.dentist) {
+        el.textContent = "No dentist selected";
+        return;
+      }
+      el.innerHTML = `
+        <img class="avatar sm" alt="" src="${state.dentist.avatar || ""}" />
+        <span>Signed in as <strong>${state.dentist.name}</strong></span>
+      `;
+    }
+
+    function revokeObjectUrls() {
+      for (const url of state.objectUrls) URL.revokeObjectURL(url);
+      state.objectUrls = [];
+    }
+
+    async function renderDentists() {
+      const grid = document.getElementById("dentistGrid");
+      const dentists = await ClinicDB.listDentists();
+      grid.innerHTML = "";
+      for (const d of dentists) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "dentist-card";
+        btn.innerHTML = `
+          <img class="avatar" alt="" src="${d.avatar || ""}" />
+          <div>
+            <div class="title">${d.title}</div>
+            <div class="name">${d.name}</div>
+          </div>
+        `;
+        btn.addEventListener("click", () => {
+          state.dentist = d;
+          persistDentist(d);
+          updateWho();
+          go("dentist/patients");
+        });
+        grid.appendChild(btn);
+      }
+    }
+
+    async function renderPatients() {
+      const body = document.getElementById("patientTableBody");
+      const patients = await ClinicDB.listPatients();
+      const startOfToday = new Date();
+      startOfToday.setHours(0, 0, 0, 0);
+      const todayStart = startOfToday.getTime();
+      const rows = await Promise.all(
+        patients.map(async (p) => {
+          const visits = await ClinicDB.listVisitsForPatient(p.id);
+          const lastVisitAt = visits.length
+            ? Math.max(...visits.map((v) => v.createdAt))
+            : 0;
+          const createdAt = p.firstVisitAt || 0;
+          const createdToday = createdAt >= todayStart;
+          return { patient: p, lastVisitAt, createdAt, createdToday };
+        })
+      );
+      rows.sort((a, b) => {
+        if (a.createdToday !== b.createdToday) return a.createdToday ? -1 : 1;
+        if (a.createdToday && b.createdToday) {
+          if (b.createdAt !== a.createdAt) return b.createdAt - a.createdAt;
+          return b.patient.id.localeCompare(a.patient.id);
+        }
+        if (b.lastVisitAt !== a.lastVisitAt) return b.lastVisitAt - a.lastVisitAt;
+        return a.patient.id.localeCompare(b.patient.id);
+      });
+      body.innerHTML = "";
+      for (const row of rows) {
+        const p = row.patient;
+        const tr = document.createElement("tr");
+        tr.className = "patient-row";
+        tr.innerHTML = `
+          <td class="mono">${p.id}</td>
+          <td>
+            <div class="patient-name">
+              <img class="avatar sm" alt="" src="${p.avatar || ""}" />
+              <span>${p.name}</span>
+            </div>
+          </td>
+          <td class="muted">${row.lastVisitAt ? fmtLastVisit(row.lastVisitAt) : "—"}</td>
+        `;
+        tr.addEventListener("click", () => go(`dentist/patient/${p.id}`));
+        body.appendChild(tr);
+      }
+    }
+
+    async function openPatient(patientId) {
+      state.patient = await ClinicDB.getPatient(patientId);
+      if (!state.patient) return false;
+      state.visit = null;
+      document.getElementById("patientTitle").textContent = state.patient.name;
+      const pav = document.getElementById("patientAvatar");
+      pav.src = state.patient.avatar || "";
+      pav.alt = state.patient.name;
+      document.getElementById("patientChips").innerHTML = `
+        <span class="chip mono">${state.patient.id}</span>
+        <span class="chip">${state.patient.gender === "female" ? "Female" : "Male"}</span>
+        ${state.patient.phone ? `<span class="chip">${state.patient.phone}</span>` : ""}
+        ${state.patient.address ? `<span class="chip">${state.patient.address}</span>` : ""}
+        <span class="chip">First visit ${fmtDate(state.patient.firstVisitAt)}</span>
+      `;
+      const visits = await ClinicDB.listVisitsForPatient(patientId);
+      const list = document.getElementById("visitList");
+      list.innerHTML = "";
+      if (!visits.length) {
+        list.innerHTML = `<div class="empty">No visits yet. Start with “New visit”.</div>`;
+      } else {
+        const visitRows = await Promise.all(
+          visits.map(async (v) => {
+            const scans = await ClinicDB.listScansForVisit(v.id);
+            return { visit: v, scanCount: scans.length };
+          })
+        );
+        for (const row of visitRows) {
+          const v = row.visit;
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "visit-item";
+          const preview = (v.notes || "").trim() || "No notes yet";
+          const doctor =
+            v.dentistName ||
+            (v.dentistId ? `Doctor ${v.dentistId}` : "Doctor unknown");
+          const scanLabel =
+            row.scanCount === 1 ? "1 scan" : `${row.scanCount} scans`;
+          const notesPreview =
+            preview.slice(0, 90) + (preview.length > 90 ? "…" : "");
+          btn.innerHTML = `
+            <div>
+              <div><strong>${fmtDate(v.createdAt)}</strong></div>
+              <div class="muted" style="font-size:0.86rem;margin-top:0.2rem;">${doctor}</div>
+              <div class="muted" style="font-size:0.86rem;margin-top:0.2rem;">${scanLabel} · ${notesPreview}</div>
+            </div>
+            <span class="muted">Open →</span>
+          `;
+          btn.addEventListener("click", () => go(`dentist/visit/${v.id}`));
+          list.appendChild(btn);
+        }
+      }
+      showScreen("patient");
+      return true;
+    }
+
+    async function openVisit(visitId) {
+      state.visit = await ClinicDB.getVisit(visitId);
+      if (!state.visit) return false;
+      if (!state.patient || state.patient.id !== state.visit.patientId) {
+        state.patient = await ClinicDB.getPatient(state.visit.patientId);
+      }
+      if (!state.patient) return false;
+      let visitDoctor = state.visit.dentistName || "";
+      if (!visitDoctor && state.visit.dentistId) {
+        const recorded = await ClinicDB.getDentist(state.visit.dentistId);
+        if (recorded) visitDoctor = recorded.name;
+      }
+      if (!visitDoctor) visitDoctor = "Doctor unknown";
+      updateWho();
+      document.getElementById("visitTitle").textContent = `Visit · ${state.patient.name}`;
+      document.getElementById("visitChips").innerHTML = `
+        <span class="chip mono">${state.patient.id}</span>
+        <span class="chip">${fmtDate(state.visit.createdAt)}</span>
+        <span class="chip">${visitDoctor}</span>
+      `;
+      document.getElementById("visitNotes").value = state.visit.notes || "";
+      document.getElementById("visitPrescription").value = state.visit.prescription || "";
+      await renderScans();
+      showScreen("visit");
+      return true;
+    }
+
+    function visitDetailsDirty() {
+      if (state.screen !== "visit" || !state.visit) return false;
+      const notesEl = document.getElementById("visitNotes");
+      const prescriptionEl = document.getElementById("visitPrescription");
+      if (!notesEl || !prescriptionEl) return false;
+      return (
+        notesEl.value !== (state.visit.notes || "") ||
+        prescriptionEl.value !== (state.visit.prescription || "")
+      );
+    }
+
+    async function confirmDiscardUnsavedVisit() {
+      if (!visitDetailsDirty()) return true;
+      return AppDialog.confirm({
+        title: "Unsaved visit details",
+        message:
+          "You have unsaved changes to the visit notes or prescription.\n\nLeave this page without saving?",
+        confirmLabel: "Leave without saving",
+        cancelLabel: "Stay",
+        danger: true,
+      });
+    }
+
+    function restoreVisitHash() {
+      if (!state.visit) return;
+      const back = `#dentist/visit/${state.visit.id}`;
+      if (location.hash !== back) history.replaceState(null, "", back);
+    }
+
+    async function confirmLeaveApp() {
+      if (await confirmDiscardUnsavedVisit()) return true;
+      restoreVisitHash();
+      return false;
+    }
+
+    async function applyHash(hash, options) {
+      const skipUnsaved = !!(options && options.skipUnsaved);
+      const parts = String(hash || "dentist").replace(/^#/, "").split("/").filter(Boolean);
+      if (parts[0] !== "dentist") return;
+
+      const nextVisitId = parts[1] === "visit" ? parts[2] : null;
+      if (
+        !skipUnsaved &&
+        state.screen === "visit" &&
+        state.visit &&
+        nextVisitId !== state.visit.id &&
+        !(await confirmDiscardUnsavedVisit())
+      ) {
+        restoreVisitHash();
+        return;
+      }
+
+      if (parts.length === 1) {
+        state.dentist = null;
+        state.patient = null;
+        state.visit = null;
+        persistDentist(null);
+        updateWho();
+        await renderDentists();
+        showScreen("dentists");
+        return;
+      }
+
+      const section = parts[1];
+      if (section === "visit" && parts[2]) {
+        if (state.screen === "visit" && state.visit && state.visit.id === parts[2]) return;
+        const ok = await openVisit(parts[2]);
+        if (!ok) {
+          history.replaceState(null, "", "#dentist/patients");
+          await applyHash("dentist/patients", { skipUnsaved: true });
+        }
+        return;
+      }
+
+      const dentist = await ensureDentist();
+      if (!dentist) {
+        history.replaceState(null, "", "#dentist");
+        await applyHash("dentist", { skipUnsaved: true });
+        return;
+      }
+      updateWho();
+
+      if (section === "patients") {
+        state.patient = null;
+        state.visit = null;
+        await renderPatients();
+        showScreen("patients");
+        return;
+      }
+
+      if (section === "new-patient") {
+        state.patient = null;
+        state.visit = null;
+        document.getElementById("newPatientForm").reset();
+        showScreen("newPatient");
+        return;
+      }
+
+      if (section === "patient" && parts[2]) {
+        const ok = await openPatient(parts[2]);
+        if (!ok) {
+          history.replaceState(null, "", "#dentist/patients");
+          await applyHash("dentist/patients", { skipUnsaved: true });
+        }
+        return;
+      }
+
+      history.replaceState(null, "", "#dentist");
+      await applyHash("dentist", { skipUnsaved: true });
+    }
+
+    async function syncFromHash(hash) {
+      if (syncing) return;
+      syncing = true;
+      try {
+        await applyHash(hash);
+      } finally {
+        syncing = false;
+      }
+    }
+
+    async function renderScans() {
+      revokeObjectUrls();
+      const grid = document.getElementById("scanGrid");
+      const empty = document.getElementById("scanEmpty");
+      grid.innerHTML = "";
+      const scans = await ClinicDB.listScansForVisit(state.visit.id);
+      empty.classList.toggle("hidden", scans.length > 0);
+      for (const scan of scans) {
+        const url = URL.createObjectURL(scan.imageBlob);
+        state.objectUrls.push(url);
+        const card = document.createElement("div");
+        card.className = "scan-card";
+        card.innerHTML = `
+          <img alt="X-ray scan" src="${url}" />
+          <div class="foot">
+            <div class="when">${fmtDate(scan.createdAt)} · ${scan.width}×${scan.height}</div>
+            <button type="button" class="danger" data-discard="${scan.id}">Discard scan</button>
+          </div>
+        `;
+        card.querySelector("[data-discard]").addEventListener("click", async () => {
+          const discard = await AppDialog.confirm({
+            title: "Discard scan",
+            message: "This X-ray will be removed from the visit.",
+            confirmLabel: "Discard scan",
+            cancelLabel: "Keep scan",
+            danger: true,
+          });
+          if (!discard) return;
+          await ClinicDB.discardScan(scan.id);
+          toast("Scan discarded", "ok");
+          await renderScans();
+        });
+        grid.appendChild(card);
+      }
+    }
+
+    document.getElementById("btnChangeDentist").addEventListener("click", () => {
+      go("dentist");
+    });
+
+    document.getElementById("btnNewPatient").addEventListener("click", () => {
+      go("dentist/new-patient");
+    });
+
+    function backToPatients() {
+      go("dentist/patients");
+    }
+    document.getElementById("btnCancelNewPatient").addEventListener("click", backToPatients);
+    document.getElementById("btnCancelNewPatient2").addEventListener("click", backToPatients);
+
+    document.getElementById("newPatientForm").addEventListener("submit", async (ev) => {
+      ev.preventDefault();
+      const name = document.getElementById("patientName").value;
+      const address = document.getElementById("patientAddress").value;
+      const phone = document.getElementById("patientPhone").value;
+      const genderEl = document.querySelector('input[name="patientGender"]:checked');
+      const gender = genderEl ? genderEl.value : "male";
+      try {
+        const patient = await ClinicDB.createPatient({ name, address, phone, gender });
+        toast(`Created ${patient.id}`, "ok");
+        go(`dentist/patient/${patient.id}`);
+      } catch (err) {
+        await AppDialog.alert({
+          title: "Couldn’t create patient",
+          message: String(err.message || err),
+          tone: "error",
+        });
+      }
+    });
+
+    document.getElementById("btnBackPatients").addEventListener("click", backToPatients);
+
+    document.getElementById("btnNewVisit").addEventListener("click", async () => {
+      if (!state.patient || !state.dentist) return;
+      const visit = await ClinicDB.createVisit({
+        patientId: state.patient.id,
+        dentistId: state.dentist.id,
+        dentistName: state.dentist.name,
+        notes: "",
+        prescription: "",
+      });
+      toast("Visit started", "ok");
+      go(`dentist/visit/${visit.id}`);
+    });
+
+    document.getElementById("btnBackPatient").addEventListener("click", () => {
+      if (state.patient) go(`dentist/patient/${state.patient.id}`);
+    });
+
+    function isPastVisitOlderThan24h(visit) {
+      if (!visit || !visit.createdAt) return false;
+      return Date.now() - visit.createdAt > 24 * 60 * 60 * 1000;
+    }
+
+    async function confirmEditPastVisit(actionLabel) {
+      if (!isPastVisitOlderThan24h(state.visit)) return true;
+      const when = fmtDate(state.visit.createdAt);
+      return AppDialog.confirm({
+        title: "Past visit",
+        message:
+          `This visit is more than 24 hours old (started ${when}).\n\n` +
+          `You are about to ${actionLabel} on a past visit’s record.\n\n` +
+          "If you meant to capture X-rays or notes for a new appointment, cancel and start a New visit instead.",
+        confirmLabel: "Continue",
+        cancelLabel: "Cancel",
+      });
+    }
+
+    document.getElementById("btnSaveNotes").addEventListener("click", async () => {
+      if (!state.visit) return;
+      if (!(await confirmEditPastVisit("save notes or prescription"))) return;
+      const notes = document.getElementById("visitNotes").value;
+      const prescription = document.getElementById("visitPrescription").value;
+      state.visit = await ClinicDB.updateVisitNotes(
+        state.visit.id,
+        notes,
+        prescription
+      );
+      toast("Visit details saved", "ok");
+    });
+
+    function showDemoXrayModal() {
+      const modal = document.getElementById("demoXrayModal");
+      if (modal) modal.classList.remove("hidden");
+    }
+    function hideDemoXrayModal() {
+      const modal = document.getElementById("demoXrayModal");
+      if (modal) modal.classList.add("hidden");
+    }
+    document.getElementById("btnCloseDemoXray").addEventListener("click", hideDemoXrayModal);
+    document.getElementById("demoXrayModal").addEventListener("click", (ev) => {
+      if (ev.target.id === "demoXrayModal") hideDemoXrayModal();
+    });
+
+    document.getElementById("btnTakeXray").addEventListener("click", async () => {
+      if (!state.visit || !state.patient || !state.dentist) return;
+      if (!(await confirmEditPastVisit("add an X-ray"))) return;
+      setBusy(true, "Capturing X-ray…");
+      try {
+        const { pngBlob, width, height } = await XrayPipeline.captureFinalXrayPng();
+        await ClinicDB.addScan({
+          visitId: state.visit.id,
+          patientId: state.patient.id,
+          dentistId: state.dentist.id,
+          imageBlob: pngBlob,
+          width,
+          height,
+        });
+        toast("X-ray captured and saved", "ok");
+        await renderScans();
+        setBusy(false);
+        showDemoXrayModal();
+      } catch (err) {
+        setBusy(false);
+        await AppDialog.alert({
+          title: "Couldn’t capture X-ray",
+          message: String(err.message || err),
+          tone: "error",
+        });
+      }
+    });
+
+    const ready = (async function init() {
+      try {
+        await ClinicDB.seedIfEmpty();
+      } catch (err) {
+        await AppDialog.alert({
+          title: "Couldn’t load clinic data",
+          message: String(err.message || err),
+          tone: "error",
+        });
+      }
+    })();
+
+    return { ready, syncFromHash, confirmLeaveApp };
+    }
+
+    function initHamamatsu() {
+
+    let syncing = false;
+
+    const S3_BASE =
+      "https://iatome-hamamatsu-xray-input-files.s3.ap-south-1.amazonaws.com";
+    const KEYS = ["Idr", "Ido", "Ixr", "Ixo"];
+    const HEADER_BYTES = 16;
+    const WIDTH = 1000;
+    const HEIGHT = 1506;
+    const NPIXELS = WIDTH * HEIGHT;
+    const EXPECTED_SIZE = HEADER_BYTES + NPIXELS * 2;
+    const REF_EPS = 1;
+
+    const FRAME_HELP = {
+      Idr: "Dark frame taken with X-rays off, used to remove detector offset from the open-beam reference.",
+      Ido: "Dark frame taken with X-rays off, used to remove detector offset from the object exposure.",
+      Ixr: "Open-beam X-ray image with no object in the beam, used as the shading / flat-field reference.",
+      Ixo: "X-ray image of the object (phantom), the acquisition you want to dark- and shading-correct.",
+    };
+
+    const FINAL_STAGE = {
+      key: "Ics",
+      label: "Ics (Final Result)",
+      desc: "Final shaded image: C × Icdo / Icdr",
+    };
+    const INTERMEDIATE_STAGES = [
+      { key: "Idr", label: "Idr", desc: "Raw dark frame paired with the reference acquisition" },
+      { key: "Ido", label: "Ido", desc: "Raw dark frame paired with the object acquisition" },
+      { key: "Ixr", label: "Ixr", desc: "Raw open-beam X-ray (no phantom)" },
+      { key: "Ixo", label: "Ixo", desc: "Raw object X-ray (phantom present)" },
+      { key: "Icdr", label: "Icdr", desc: "Dark-corrected reference: Ixr − Idr" },
+      { key: "Icdo", label: "Icdo", desc: "Dark-corrected object: Ixo − Ido" },
+    ];
+
+    /** @type {'none' | 'local' | 'sample'} */
+    let sourceMode = "none";
+    /** @type {Record<string, Float32Array | null>} */
+    let frames = { Idr: null, Ido: null, Ixr: null, Ixo: null };
+    /** @type {Record<string, string>} */
+    let frameLabels = { Idr: "", Ido: "", Ixr: "", Ixo: "" };
+    /** @type {Record<string, Float32Array> | null} */
+    let sampleCache = null;
+    /** @type {Record<string, Float32Array> | null} */
+    let results = null;
+    /** @type {Set<string>} */
+    const downloadingKeys = new Set();
+
+    const logEl = document.getElementById("log");
+    const inputStage = document.getElementById("inputStage");
+    const viewStage = document.getElementById("viewStage");
+    const btnSample = document.getElementById("btnSample");
+    const btnUploadMode = document.getElementById("btnUploadMode");
+    const btnClear = document.getElementById("btnClear");
+    const btnProcess = document.getElementById("btnProcess");
+    const processHint = document.getElementById("processHint");
+    const btnBack = document.getElementById("btnBack");
+    const btnExplain = document.getElementById("btnExplain");
+    const btnCloseExplain = document.getElementById("btnCloseExplain");
+    const explainModal = document.getElementById("explainModal");
+    const btnShowIntermediate = document.getElementById("btnShowIntermediate");
+    const intermediateAccordion = document.getElementById("intermediateAccordion");
+    const btnRetrySample = document.getElementById("btnRetrySample");
+    const sampleRetry = document.getElementById("sampleRetry");
+    const statusPanel = document.getElementById("statusPanel");
+    const statusList = document.getElementById("statusList");
+    const canvas = document.getElementById("canvas");
+    const viewLabel = document.getElementById("viewLabel");
+    const viewMeta = document.getElementById("viewMeta");
+    const viewDisplay = document.getElementById("viewDisplay");
+    const viewFinalButtonsEl = document.getElementById("viewFinalButtons");
+    const viewIntermediateButtonsEl = document.getElementById("viewIntermediateButtons");
+    /** @type {HTMLButtonElement[]} */
+    let viewButtons = [];
+    let processReadyAnnounced = false;
+    let intermediateVisible = false;
+
+    function setViewDisplayVisible(show) {
+      viewDisplay.classList.toggle("hidden", !show);
+    }
+
+    function makeStageButton(stage) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.dataset.key = stage.key;
+      btn.innerHTML = `
+        <span class="stage-name">${stage.label}</span>
+        <span class="stage-desc">${stage.desc}</span>
+      `;
+      btn.addEventListener("click", () => showView(stage.key));
+      return btn;
+    }
+
+    function refreshViewButtonList() {
+      viewButtons = [
+        ...viewFinalButtonsEl.querySelectorAll("button"),
+        ...viewIntermediateButtonsEl.querySelectorAll("button"),
+      ];
+    }
+
+    function setIntermediateVisible(show) {
+      intermediateVisible = show;
+      intermediateAccordion.classList.toggle("open", show);
+      viewIntermediateButtonsEl.classList.toggle("hidden", !show);
+      btnShowIntermediate.setAttribute("aria-expanded", show ? "true" : "false");
+      if (show) {
+        setActiveViewButton(null);
+        setViewDisplayVisible(false);
+      }
+    }
+
+    function buildViewStageButtons() {
+      viewFinalButtonsEl.innerHTML = "";
+      viewIntermediateButtonsEl.innerHTML = "";
+      viewFinalButtonsEl.appendChild(makeStageButton(FINAL_STAGE));
+      for (const stage of INTERMEDIATE_STAGES) {
+        viewIntermediateButtonsEl.appendChild(makeStageButton(stage));
+      }
+      refreshViewButtonList();
+      setIntermediateVisible(false);
+    }
+
+    function log(msg, cls) {
+      const line = document.createElement("div");
+      if (cls) line.className = cls;
+      line.textContent = msg;
+      if (logEl.textContent.startsWith("Ready.")) logEl.textContent = "";
+      logEl.appendChild(line);
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    function mean(arr) {
+      let s = 0;
+      for (let i = 0; i < arr.length; i++) s += arr[i];
+      return s / arr.length;
+    }
+
+    function allFramesReady() {
+      return KEYS.every((k) => frames[k] instanceof Float32Array);
+    }
+
+    function updateProcessEnabled() {
+      const ready = allFramesReady();
+      btnProcess.classList.toggle("is-ready", ready);
+      processHint.classList.toggle("visible", ready);
+      if (ready && !processReadyAnnounced) {
+        processReadyAnnounced = true;
+        log(
+          "All four frames are ready. Click the button below to continue.",
+          "ok"
+        );
+      }
+      if (!ready) processReadyAnnounced = false;
+    }
+
+    function setActiveViewButton(key) {
+      for (const btn of viewButtons) {
+        btn.classList.toggle("active", btn.dataset.key === key);
+      }
+    }
+
+    function showInputStage() {
+      viewStage.classList.add("hidden");
+      viewStage.setAttribute("aria-hidden", "true");
+      inputStage.classList.remove("hidden");
+    }
+
+    function showViewStage() {
+      setIntermediateVisible(false);
+      setViewDisplayVisible(true);
+      inputStage.classList.add("hidden");
+      viewStage.classList.remove("hidden");
+      viewStage.setAttribute("aria-hidden", "false");
+    }
+
+    function currentHashPath() {
+      return (location.hash || "").replace(/^#/, "") || "home";
+    }
+
+    function go(path, { replace = false } = {}) {
+      const next = String(path || "hamamatsu").replace(/^#/, "");
+      if (currentHashPath() === next) {
+        syncFromHash(next);
+        return;
+      }
+      if (replace) {
+        history.replaceState(null, "", "#" + next);
+        syncFromHash(next);
+        return;
+      }
+      location.hash = next;
+    }
+
+    function clearResultsView() {
+      results = null;
+      setActiveViewButton(null);
+      setIntermediateVisible(false);
+      setViewDisplayVisible(true);
+      viewLabel.textContent = "No image yet";
+      viewMeta.textContent = "";
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, WIDTH, HEIGHT);
+      if (currentHashPath() === "hamamatsu/results") {
+        go("hamamatsu", { replace: true });
+      } else {
+        showInputStage();
+      }
+    }
+
+    async function syncFromHash(hash) {
+      if (syncing) return;
+      syncing = true;
+      try {
+        const parts = String(hash || "hamamatsu").replace(/^#/, "").split("/").filter(Boolean);
+        if (parts[0] !== "hamamatsu") return;
+
+        if (parts[1] === "results") {
+          if (!results) {
+            history.replaceState(null, "", "#hamamatsu");
+            showInputStage();
+            return;
+          }
+          showViewStage();
+          showView("Ics");
+          return;
+        }
+
+        showInputStage();
+      } finally {
+        syncing = false;
+      }
+    }
+
+    function setChoiceSelected(mode) {
+      btnSample.classList.toggle("selected", mode === "sample");
+      btnUploadMode.classList.toggle("selected", mode === "local");
+    }
+
+    function showUploadUI(show) {
+      statusPanel.classList.toggle("is-local", show);
+    }
+
+    function showStatusUI(show) {
+      statusPanel.style.display = show ? "block" : "none";
+      if (!show) hideSampleRetry();
+    }
+
+    function showSampleRetry(show) {
+      sampleRetry.style.display = show ? "flex" : "none";
+    }
+
+    function hideSampleRetry() {
+      showSampleRetry(false);
+    }
+
+    function applySampleToFrames(cache) {
+      for (const key of KEYS) {
+        frames[key] = cache[key];
+        frameLabels[key] = `sample:${key}.bin`;
+      }
+    }
+
+    function sampleCacheReady() {
+      return !!(sampleCache && KEYS.every((k) => sampleCache[k]));
+    }
+
+    function refreshStatusList() {
+      for (const key of KEYS) {
+        const li = statusList.querySelector(`li[data-key="${key}"]`);
+        if (!li) continue;
+        const state = li.querySelector(".state");
+        const spinner = li.querySelector(".spinner");
+        const fileNameEl = li.querySelector(".file-name");
+        const downloading = downloadingKeys.has(key);
+        li.classList.toggle("ready", !!frames[key]);
+        li.classList.remove("error");
+        spinner.classList.toggle("on", downloading && !frames[key]);
+        if (frames[key]) {
+          state.className = "state ok";
+          state.textContent =
+            sourceMode === "sample" ? "ready (sample)" : "ready (local)";
+          fileNameEl.textContent = frameLabels[key] || `${key}.bin`;
+        } else if (downloading) {
+          state.className = "state warn";
+          state.textContent = "downloading…";
+          fileNameEl.textContent = "No file selected";
+        } else {
+          state.className = "state warn";
+          state.textContent = sourceMode === "none" ? "not loaded" : "missing";
+          fileNameEl.textContent = "No file selected";
+        }
+      }
+
+      updateProcessEnabled();
+    }
+
+    function resetFramesKeepMode() {
+      for (const key of KEYS) {
+        frames[key] = null;
+        frameLabels[key] = "";
+        const input = document.querySelector(`#file-${key}`);
+        if (input) input.value = "";
+      }
+      clearResultsView();
+      refreshStatusList();
+    }
+
+    function parseFrameBuffer(buf, label) {
+      if (buf.byteLength !== EXPECTED_SIZE) {
+        throw new Error(
+          `${label}: size ${buf.byteLength} bytes, expected ${EXPECTED_SIZE}`
+        );
+      }
+      const u16 = new Uint16Array(buf, HEADER_BYTES, NPIXELS);
+      const f32 = new Float32Array(NPIXELS);
+      for (let i = 0; i < NPIXELS; i++) f32[i] = u16[i];
+      return f32;
+    }
+
+    async function loadLocalFile(key, file) {
+      const buf = await file.arrayBuffer();
+      return {
+        data: parseFrameBuffer(buf, file.name || key),
+        label: file.name || `${key}.bin`,
+      };
+    }
+
+    async function downloadSampleFrame(key) {
+      const name = `${key}.bin`;
+      const url = `${S3_BASE}/${name}`;
+      log(`GET ${url}`);
+      const res = await fetch(url, { mode: "cors", cache: "no-store" });
+      if (!res.ok) throw new Error(`${name}: HTTP ${res.status}`);
+      const buf = await res.arrayBuffer();
+      return {
+        data: parseFrameBuffer(buf, name),
+        label: `sample:${name}`,
+      };
+    }
+
+    function buildFrameCards() {
+      statusList.innerHTML = "";
+      for (const key of KEYS) {
+        const li = document.createElement("li");
+        li.dataset.key = key;
+        li.innerHTML = `
+          <div class="status-row">
+            <span class="key">${key}</span>
+            <span class="status-meta">
+              <span class="spinner" aria-hidden="true"></span>
+              <span class="state warn">not loaded</span>
+            </span>
+          </div>
+          <div class="help">${FRAME_HELP[key]}</div>
+          <div class="upload-actions">
+            <label class="file-btn" for="file-${key}">Choose file</label>
+            <input id="file-${key}" type="file" accept=".bin,application/octet-stream,*/*" />
+            <span class="file-name">No file selected</span>
+          </div>
+        `;
+        statusList.appendChild(li);
+
+        const input = li.querySelector(`#file-${key}`);
+        input.addEventListener("change", async () => {
+          const file = input.files && input.files[0];
+          if (!file) return;
+          try {
+            if (sourceMode !== "local") {
+              throw new Error("Switch to “Upload my files” before choosing local files.");
+            }
+            const loaded = await loadLocalFile(key, file);
+            frames[key] = loaded.data;
+            frameLabels[key] = loaded.label;
+            clearResultsView();
+            log(
+              `${key}: loaded “${loaded.label}” (mean=${mean(loaded.data).toFixed(1)})`,
+              "ok"
+            );
+            refreshStatusList();
+            if (!allFramesReady()) {
+              const missing = KEYS.filter((k) => !frames[k]).join(", ");
+              log(`Still missing: ${missing}`);
+            }
+          } catch (err) {
+            frames[key] = null;
+            frameLabels[key] = "";
+            input.value = "";
+            li.classList.add("error");
+            const message = String(err.message || err);
+            log(message, "bad");
+            await AppDialog.alert({
+              title: "Couldn’t load file",
+              message,
+              tone: "error",
+            });
+            refreshStatusList();
+          }
+        });
+      }
+    }
+
+    function darkCorrect(ix, idark) {
+      const out = new Float32Array(NPIXELS);
+      for (let i = 0; i < NPIXELS; i++) {
+        const v = ix[i] - idark[i];
+        out[i] = v > 0 ? v : 0;
+      }
+      return out;
+    }
+
+    function shadingCorrect(icdo, icdr) {
+      let sum = 0;
+      let n = 0;
+      for (let i = 0; i < NPIXELS; i++) {
+        if (icdr[i] > REF_EPS) {
+          sum += icdr[i];
+          n++;
+        }
+      }
+      if (!n) throw new Error("no usable Icdr pixels");
+      const C = sum / n;
+      const ics = new Float32Array(NPIXELS);
+      for (let i = 0; i < NPIXELS; i++) {
+        ics[i] = icdr[i] > REF_EPS ? (C * icdo[i]) / icdr[i] : 0;
+      }
+      return { ics, C };
+    }
+
+    function percentileWindow(src) {
+      const sampleN = Math.min(200000, src.length);
+      const step = Math.max(1, Math.floor(src.length / sampleN));
+      const sample = new Float32Array(sampleN);
+      for (let i = 0; i < sampleN; i++) sample[i] = src[i * step];
+      sample.sort();
+      let lo = sample[Math.floor(sampleN * 0.01)];
+      let hi = sample[Math.floor(sampleN * 0.99)];
+      if (!(hi > lo)) hi = lo + 1;
+      return { lo, hi };
+    }
+
+    function renderToCanvas(src) {
+      const { lo, hi } = percentileWindow(src);
+      const ctx = canvas.getContext("2d");
+      const img = ctx.createImageData(WIDTH, HEIGHT);
+      const d = img.data;
+      const scale = 255 / (hi - lo);
+      for (let i = 0; i < NPIXELS; i++) {
+        let v = src[i];
+        if (v <= lo) v = 0;
+        else if (v >= hi) v = 255;
+        else v = (v - lo) * scale;
+        const o = i * 4;
+        const g = v | 0;
+        d[o] = g;
+        d[o + 1] = g;
+        d[o + 2] = g;
+        d[o + 3] = 255;
+      }
+      ctx.putImageData(img, 0, 0);
+      return { lo, hi };
+    }
+
+    async function showView(key) {
+      const src = results && results[key];
+      if (!src) {
+        const message = `Nothing to show for ${key}. Run correction first.`;
+        log(message, "bad");
+        await AppDialog.alert({
+          title: "Nothing to show",
+          message,
+          tone: "warn",
+        });
+        return;
+      }
+      if (key === "Ics" && intermediateVisible) {
+        setIntermediateVisible(false);
+      }
+      setActiveViewButton(key);
+      setViewDisplayVisible(true);
+      const { lo, hi } = renderToCanvas(src);
+      viewLabel.textContent = key;
+      viewMeta.textContent =
+        `mean=${mean(src).toFixed(1)}  ·  ` +
+        `display window [${lo.toFixed(1)}, ${hi.toFixed(1)}]`;
+      log(`Showing ${key}`, "ok");
+    }
+
+    btnUploadMode.addEventListener("click", () => {
+      sourceMode = "local";
+      setChoiceSelected("local");
+      showUploadUI(true);
+      showStatusUI(true);
+      hideSampleRetry();
+      resetFramesKeepMode();
+      log("Upload mode: choose all 4 local files below.", "ok");
+    });
+
+    async function fetchSampleSetFromS3() {
+      for (const key of KEYS) downloadingKeys.add(key);
+      refreshStatusList();
+
+      try {
+        const loadedList = await Promise.all(
+          KEYS.map(async (key) => {
+            const loaded = await downloadSampleFrame(key);
+            frames[key] = loaded.data;
+            frameLabels[key] = loaded.label;
+            downloadingKeys.delete(key);
+            refreshStatusList();
+            log(`${key}: sample ok  mean=${mean(loaded.data).toFixed(1)}`, "ok");
+            return [key, loaded.data];
+          })
+        );
+
+        const cache = {};
+        for (const [key, data] of loadedList) cache[key] = data;
+        sampleCache = cache;
+      } finally {
+        downloadingKeys.clear();
+        refreshStatusList();
+      }
+    }
+
+    function setSampleBusy(show) {
+      const overlay = document.getElementById("sampleBusy");
+      if (overlay) overlay.classList.toggle("hidden", !show);
+    }
+
+    async function loadSampleFromS3() {
+      hideSampleRetry();
+      btnSample.disabled = true;
+      btnUploadMode.disabled = true;
+      btnRetrySample.disabled = true;
+      clearResultsView();
+      for (const key of KEYS) downloadingKeys.add(key);
+      resetFramesKeepMode();
+      log("Loading sample set from S3…");
+      setSampleBusy(true);
+
+      try {
+        await fetchSampleSetFromS3();
+        hideSampleRetry();
+        log("Sample set ready (4/4).", "ok");
+      } catch (err) {
+        setSampleBusy(false);
+        downloadingKeys.clear();
+        sampleCache = null;
+        resetFramesKeepMode();
+        showSampleRetry(true);
+        const detail = String(err.message || err);
+        log(detail, "bad");
+        let hint = "Click Retry sample download to try again.";
+        if (String(err).includes("Failed to fetch") || err.name === "TypeError") {
+          hint = "The sample files could not be downloaded. Check that S3 allows GET from this page, then retry.";
+          log(hint, "bad");
+        }
+        log("Sample download failed. Click Retry sample download.", "warn");
+        await AppDialog.alert({
+          title: "Sample download failed",
+          message: `${detail}\n\n${hint}`,
+          tone: "error",
+        });
+      } finally {
+        setSampleBusy(false);
+        btnSample.disabled = false;
+        btnUploadMode.disabled = false;
+        btnRetrySample.disabled = false;
+        updateProcessEnabled();
+      }
+    }
+
+    btnSample.addEventListener("click", async () => {
+      sourceMode = "sample";
+      setChoiceSelected("sample");
+      showUploadUI(false);
+      showStatusUI(true);
+      clearResultsView();
+
+      // Already downloaded earlier in this session: reuse cache.
+      if (sampleCacheReady()) {
+        hideSampleRetry();
+        applySampleToFrames(sampleCache);
+        for (const key of KEYS) {
+          const input = document.querySelector(`#file-${key}`);
+          if (input) input.value = "";
+        }
+        refreshStatusList();
+        log("Using sample data already loaded in this session.", "ok");
+        return;
+      }
+
+      await loadSampleFromS3();
+    });
+
+    btnRetrySample.addEventListener("click", async () => {
+      sourceMode = "sample";
+      setChoiceSelected("sample");
+      showUploadUI(false);
+      showStatusUI(true);
+      await loadSampleFromS3();
+    });
+
+    btnClear.addEventListener("click", () => {
+      sourceMode = "none";
+      setChoiceSelected("none");
+      showUploadUI(false);
+      showStatusUI(false);
+      hideSampleRetry();
+      sampleCache = null;
+      resetFramesKeepMode();
+      logEl.textContent = "";
+      log("Cleared inputs and downloaded sample files. Use sample data will re-download.", "ok");
+    });
+
+    function openExplainModal() {
+      explainModal.classList.remove("hidden");
+      explainModal.setAttribute("aria-hidden", "false");
+      btnCloseExplain.focus();
+    }
+
+    function closeExplainModal() {
+      explainModal.classList.add("hidden");
+      explainModal.setAttribute("aria-hidden", "true");
+    }
+
+    btnExplain.addEventListener("click", openExplainModal);
+    btnCloseExplain.addEventListener("click", closeExplainModal);
+    explainModal.addEventListener("click", (ev) => {
+      if (ev.target === explainModal) closeExplainModal();
+    });
+    document.addEventListener("keydown", (ev) => {
+      if (ev.key === "Escape" && !explainModal.classList.contains("hidden")) {
+        closeExplainModal();
+      }
+    });
+
+    btnShowIntermediate.addEventListener("click", () => {
+      const opening = !intermediateVisible;
+      setIntermediateVisible(opening);
+      if (opening) {
+        log("Pick an intermediate step to display, or Ics (Final Result).", "ok");
+      } else if (results) {
+        showView("Ics");
+      }
+    });
+
+    btnBack.addEventListener("click", () => {
+      if (currentHashPath() === "hamamatsu/results") history.back();
+      else go("hamamatsu", { replace: true });
+      log("Back to inputs. Click “Process Frames and View Result” again to reopen the viewer.", "ok");
+    });
+
+    let processing = false;
+
+    btnProcess.addEventListener("click", async () => {
+      if (processing) return;
+      if (sourceMode === "none") {
+        const message = "Select “Use sample data” or “Upload my files” before processing.";
+        log(message, "warn");
+        await AppDialog.alert({
+          title: "Choose an input source",
+          message,
+          tone: "warn",
+        });
+        return;
+      }
+      if (!allFramesReady()) {
+        const message = sourceMode === "sample"
+          ? (downloadingKeys.size
+            ? "Sample data is still loading. Wait until all four frames are ready, then try again."
+            : "Sample data is not ready. Choose “Use sample data” again, or retry the download.")
+          : "Upload all four frames (Idr, Ido, Ixr, and Ixo) before processing.\n\nIf your intention is just to try out this tool, choose “Use sample data” instead. It loads a built-in set of all four frames.";
+        log(message, "warn");
+        await AppDialog.alert({
+          title: "Frames not ready",
+          message,
+          tone: "warn",
+        });
+        return;
+      }
+      processing = true;
+      try {
+        const icdr = darkCorrect(frames.Ixr, frames.Idr);
+        const icdo = darkCorrect(frames.Ixo, frames.Ido);
+        const { ics, C } = shadingCorrect(icdo, icdr);
+        results = {
+          Idr: frames.Idr,
+          Ido: frames.Ido,
+          Ixr: frames.Ixr,
+          Ixo: frames.Ixo,
+          Icdr: icdr,
+          Icdo: icdo,
+          Ics: ics,
+        };
+        log(
+          `Processed (${sourceMode}). C=${C.toFixed(3)}  Icdr mean=${mean(icdr).toFixed(1)}  Icdo mean=${mean(icdo).toFixed(1)}`,
+          "ok"
+        );
+        go("hamamatsu/results");
+      } catch (err) {
+        const message = String(err.message || err);
+        log(message, "bad");
+        await AppDialog.alert({
+          title: "Couldn’t process frames",
+          message,
+          tone: "error",
+        });
+        go("hamamatsu", { replace: true });
+      } finally {
+        processing = false;
+        updateProcessEnabled();
+      }
+    });
+
+    buildViewStageButtons();
+    buildFrameCards();
+    refreshStatusList();
+
+    return { syncFromHash };
+    }
+
+    let routeRunning = false;
+    let routeAgain = false;
+
+    async function route() {
+      if (routeRunning) {
+        routeAgain = true;
+        return;
+      }
+      routeRunning = true;
+      try {
+        do {
+          routeAgain = false;
+          await routeOnce();
+        } while (routeAgain);
+      } finally {
+        routeRunning = false;
+      }
+    }
+
+    async function routeOnce() {
+      const hash = (location.hash || '#home').replace(/^#/, '') || 'home';
+      const app = hash.split('/')[0] || 'home';
+
+      if (app !== 'dentist' && window.__dentistCtl) {
+        if (!(await window.__dentistCtl.confirmLeaveApp())) return;
+        window.__dentistCtl = null;
+      }
+
+      if (app === 'dentist') {
+        window.__hamamatsuCtl = null;
+        const already =
+          document.body.classList.contains('view-dentist') && window.__dentistCtl;
+        if (!already) {
+          document.body.classList.remove('view-home', 'view-dentist', 'view-hamamatsu');
+          document.body.classList.add('view-dentist');
+          document.title = 'ALERIO Dentist Workspace';
+          mountTemplate('tpl-dentist');
+          wireHomeLinks();
+          window.__dentistCtl = initDentist();
+          await window.__dentistCtl.ready;
+        }
+        await window.__dentistCtl.syncFromHash(hash);
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      if (app === 'hamamatsu') {
+        window.__dentistCtl = null;
+        const already =
+          document.body.classList.contains('view-hamamatsu') && window.__hamamatsuCtl;
+        if (!already) {
+          document.body.classList.remove('view-home', 'view-dentist', 'view-hamamatsu');
+          document.body.classList.add('view-hamamatsu');
+          document.title = 'Hamamatsu Decoding Pipeline';
+          mountTemplate('tpl-hamamatsu');
+          wireHomeLinks();
+          window.__hamamatsuCtl = initHamamatsu();
+        }
+        await window.__hamamatsuCtl.syncFromHash(hash);
+        window.scrollTo(0, 0);
+        return;
+      }
+
+      window.__dentistCtl = null;
+      window.__hamamatsuCtl = null;
+      document.body.classList.remove('view-home', 'view-dentist', 'view-hamamatsu');
+      document.body.classList.add('view-home');
+      document.title = 'ALERIO Clinic Demo';
+      mountTemplate('tpl-home');
+      wireHomeLinks();
+      window.scrollTo(0, 0);
+    }
+
+    window.addEventListener('hashchange', () => { route(); });
+    route();
+  </script>
+</body>
+</html>
